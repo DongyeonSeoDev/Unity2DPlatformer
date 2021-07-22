@@ -12,6 +12,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Sprite downSprite = null;
 
     private readonly int hashIsMove = Animator.StringToHash("isMove");
+    private readonly int hashIsBlink = Animator.StringToHash("isBlink");
+
     private bool isJump = false;
     private bool isDown = false;
 
@@ -25,6 +27,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Update()
     {
         animator.SetBool(hashIsMove, playerInput.xMove != 0);
+        animator.SetBool(hashIsBlink, playerInput.isBlink);
     }
 
     public void JumpAnimation()
