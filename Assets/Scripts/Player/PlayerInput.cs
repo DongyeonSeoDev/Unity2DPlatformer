@@ -12,8 +12,21 @@ public class PlayerInput : MonoBehaviour
 
     private float lastInputTime = 0f;
 
+    private void Start()
+    {
+        lastInputTime = Time.time;
+    }
+
     private void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            xMove = 0;
+            isJump = false;
+            isBlink = false;
+            return;
+        }
+
         xMove = Input.GetAxisRaw("Horizontal");
         isJump = Input.GetButtonDown("Jump");
 

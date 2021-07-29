@@ -13,7 +13,7 @@ public class RotatingThornAnimation : MonoBehaviour
     private void Update()
     {
         currentRotation = transform.rotation;
-        targetRotation.eulerAngles = currentRotation.eulerAngles + addRotation;
+        targetRotation.eulerAngles = currentRotation.eulerAngles + addRotation * Time.deltaTime;
         transform.rotation = targetRotation;
     }
 }
