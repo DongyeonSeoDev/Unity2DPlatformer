@@ -19,7 +19,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0)
+        if (GameManager.IsGameOver)
         {
             xMove = 0;
             isJump = false;

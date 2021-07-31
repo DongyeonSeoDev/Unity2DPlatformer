@@ -2,31 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    private GameManager gameManager = null;
+
     public CanvasGroup gameOverCanvasGroup = null;
     public Button reStart = null;
     public Button exit = null;
 
     private void Awake()
     {
+        gameManager = GameManager.Instance;
+
         reStart.onClick.AddListener(() =>
         {
             Time.timeScale = 1f;
 
             gameOverCanvasGroup.DOFade(0.5f, 0.1f).OnComplete(() =>
             {
-                DOTween.KillAll();
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                gameManager.ReStart();
             });
         });
 
         exit.onClick.AddListener(() =>
         {
-            Application.Quit();
+            gameManager.Exit();
         });
     }
 
@@ -35,6 +37,7 @@ public class UIManager : MonoBehaviour
         gameOverCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
         {
             Time.timeScale = 0f;
+
             gameOverCanvasGroup.interactable = true;
             gameOverCanvasGroup.blocksRaycasts = true;
         });

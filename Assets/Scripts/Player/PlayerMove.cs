@@ -10,11 +10,13 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] private Vector2 jumpforce = Vector2.zero;
     [SerializeField] private float speed = 0.5f;
+    [SerializeField] private float limitMinY = -10f;
 
     public LayerMask whatIsGround;
 
     private PlayerInput playerInput = null;
     private PlayerAnimation playerAnimation = null;
+
     private SpriteRenderer spriteRenderer = null;
     private Rigidbody2D playerRigidbody = null;
 
@@ -27,20 +29,30 @@ public class PlayerMove : MonoBehaviour
     {
         playerInput = FindObjectOfType<PlayerInput>();
         playerAnimation = FindObjectOfType<PlayerAnimation>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
+        if (GameManager.IsGameOver) return;
+
         if (playerInput.isJump)
         {
             isJump = true;
+        }
+
+        if (transform.position.y < limitMinY)
+        {
+            GameManager.GameOver();
         }
     }
 
     private void FixedUpdate()
     {
+        if (GameManager.IsGameOver) return;
+
         if (playerInput.xMove == 1f)
         {
             spriteRenderer.flipX = false;
