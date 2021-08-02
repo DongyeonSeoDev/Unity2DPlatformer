@@ -24,20 +24,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager uIManager = null;
 
-    private bool isGameOver = false;
-
-    public static bool IsGameOver
-    {
-        get
-        {
-            return Instance.isGameOver;
-        }
-
-        private set
-        {
-            Instance.isGameOver = value;
-        }
-    }
+    public static bool isPause = false;
 
     private void Awake()
     {
@@ -55,9 +42,9 @@ public class GameManager : MonoBehaviour
 
     public static void GameOver()
     {
-        if (IsGameOver) return;
+        if (isPause) return;
 
-        IsGameOver = true;
+        isPause = true;
 
         Instance.uIManager.GameOver();
     }
@@ -67,6 +54,7 @@ public class GameManager : MonoBehaviour
         DOTween.CompleteAll();
         DOTween.KillAll();
 
+        isPause = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

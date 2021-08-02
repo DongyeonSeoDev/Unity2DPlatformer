@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.IsGameOver) return;
+        if (GameManager.isPause) return;
 
         if (playerInput.isJump)
         {
@@ -51,7 +51,12 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.IsGameOver) return;
+        playerRigidbody.bodyType = GameManager.isPause ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
+
+        if (GameManager.isPause)
+        {
+            return;
+        }
 
         if (playerInput.xMove == 1f)
         {

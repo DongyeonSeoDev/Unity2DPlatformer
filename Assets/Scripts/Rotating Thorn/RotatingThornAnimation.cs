@@ -12,7 +12,10 @@ public class RotatingThornAnimation : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.IsGameOver) return;
+        if (GameManager.isPause)
+        {
+            return;
+        }
 
         currentRotation = transform.rotation;
         targetRotation.eulerAngles = currentRotation.eulerAngles + addRotation * Time.deltaTime;

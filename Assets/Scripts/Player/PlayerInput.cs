@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
     public float xMove { get; private set; } = 0f;
     public bool isJump { get; private set; } = false;
     public bool isBlink { get; private set; } = false;
+    public bool isPause { get; private set; } = false;
 
     private float lastInputTime = 0f;
 
@@ -19,7 +20,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.IsGameOver)
+        isPause = Input.GetButtonDown("Cancel");
+
+        if (GameManager.isPause)
         {
             xMove = 0;
             isJump = false;
