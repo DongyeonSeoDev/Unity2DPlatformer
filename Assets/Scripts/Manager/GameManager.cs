@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
 
     public void ReStart()
     {
-        DOTween.CompleteAll();
         DOTween.KillAll();
 
         isPause = false;
