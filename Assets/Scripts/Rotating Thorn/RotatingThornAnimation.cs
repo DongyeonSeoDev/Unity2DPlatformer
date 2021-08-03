@@ -9,7 +9,6 @@ public class RotatingThornAnimation : MonoBehaviour
     private Quaternion currentRotation = Quaternion.identity;
     private Quaternion targetRotation = Quaternion.identity;
 
-
     private void Update()
     {
         if (GameManager.isPause)
