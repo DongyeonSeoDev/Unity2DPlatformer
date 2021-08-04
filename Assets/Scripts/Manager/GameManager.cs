@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public static bool isPause = false;
 
+    public bool isEnemyStop = false;
+
     private void Awake()
     {
         if (instance != null)
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
         if (isPause) return;
 
         isPause = true;
+        Instance.isEnemyStop = true;
 
         Instance.uIManager.GameOver();
     }

@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] private Vector2[] nextPositions;
-    [SerializeField] private float[] speeds;
+    [SerializeField] private Vector2[] nextPositions = null;
+    [SerializeField] private float[] speeds = null;
 
     private bool isMove = false;
     private bool isPause = false;
@@ -22,7 +22,12 @@ public class EnemyMove : MonoBehaviour
             isPause = true;
         }
 
-        if (isPause && !GameManager.isPause)
+        if (GameManager.Instance.isEnemyStop)
+        {
+            currentMoveTween.Kill();
+        }
+
+        if (isPause && !GameManager.isPause && !GameManager.Instance.isEnemyStop)
         {
             currentMoveTween.Play();
             isPause = false;

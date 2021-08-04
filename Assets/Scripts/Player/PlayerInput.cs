@@ -6,10 +6,15 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float blinkTransitionTime = 5f;
 
-    public float xMove { get; private set; } = 0f;
-    public bool isJump { get; private set; } = false;
-    public bool isBlink { get; private set; } = false;
-    public bool isPause { get; private set; } = false;
+    public float xMove = 0f;
+
+    public bool isJump = false;
+    public bool isBlink = false;
+    public bool isPause = false;
+
+    public bool isRightButtonClick = false;
+    public bool isLeftButtonClick = false;
+    public bool isJumpButtonClick = false;
 
     private float lastInputTime = 0f;
 
@@ -32,6 +37,22 @@ public class PlayerInput : MonoBehaviour
 
         xMove = Input.GetAxisRaw("Horizontal");
         isJump = Input.GetButtonDown("Jump");
+
+        if (isRightButtonClick)
+        {
+            xMove = Mathf.Clamp(xMove + 1, -1, 1);
+        }
+
+        if (isLeftButtonClick)
+        {
+            xMove = Mathf.Clamp(xMove - 1, -1, 1);
+        }
+
+        if (isJumpButtonClick)
+        {
+            isJump = true;
+            isJumpButtonClick = false;
+        }
 
         if (xMove != 0 || isJump)
         {

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private Transform groundCheckTransform;
-    [SerializeField] private Transform rightGroundCheckTransform;
-    [SerializeField] private Transform leftGroundCheckTransform;
+    [SerializeField] private Transform groundCheckTransform = null;
+    [SerializeField] private Transform rightGroundCheckTransform = null;
+    [SerializeField] private Transform leftGroundCheckTransform = null;
 
     [SerializeField] private Vector2 jumpforce = Vector2.zero;
     [SerializeField] private float speed = 0.5f;
@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
             isJump = true;
         }
 
-        if (transform.position.y < limitMinY)
+        if (transform.position.y < limitMinY && !GameManager.isPause && !GameManager.Instance.isEnemyStop)
         {
             GameManager.GameOver();
         }
