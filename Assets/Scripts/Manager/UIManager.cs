@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
 {
     public CanvasGroup gameOverCanvasGroup = null;
     public CanvasGroup pauseCanvasGroup = null;
+    public CanvasGroup buttonCanvasGroup = null;
 
     public Button gameOverReStart = null;
     public Button gameOverExit = null;
@@ -166,6 +167,8 @@ public class UIManager : MonoBehaviour
             pauseCanvasGroup.blocksRaycasts = true;
         }
 
+        buttonCanvasGroup.DOFade(isPause ? 0f : 1f, 0.5f);
+
         pauseCanvasGroup.DOFade(isPause ? 1f : 0f, 0.5f).OnComplete(() => 
         {
             if (isPause)
@@ -184,6 +187,8 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
+        buttonCanvasGroup.DOFade(0f, 0.2f);
+
         gameOverCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
         {
             Time.timeScale = 0f;
