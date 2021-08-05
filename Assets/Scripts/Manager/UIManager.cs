@@ -8,11 +8,16 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     public CanvasGroup gameOverCanvasGroup = null;
+    public CanvasGroup gameClearCanvasGroup = null;
     public CanvasGroup pauseCanvasGroup = null;
     public CanvasGroup mainCanvasGroup = null;
 
     public Button gameOverReStart = null;
     public Button gameOverExit = null;
+
+    public Button gameClearReStart = null;
+    public Button gameClearExit = null;
+    public Text gameClearTimeText = null;
 
     public Button pauseContinue = null;
     public Button pauseReStart = null;
@@ -55,6 +60,32 @@ public class UIManager : MonoBehaviour
         });
 
         gameOverExit.onClick.AddListener(() =>
+        {
+            if (isClick)
+            {
+                return;
+            }
+
+            gameManager.Exit();
+        });
+
+        gameClearReStart.onClick.AddListener(() =>
+        {
+            if (isClick)
+            {
+                return;
+            }
+
+            Time.timeScale = 1f;
+            isClick = true;
+
+            gameClearCanvasGroup.DOFade(0.5f, 0.1f).OnComplete(() =>
+            {
+                gameManager.ReStart();
+            });
+        });
+
+        gameClearExit.onClick.AddListener(() =>
         {
             if (isClick)
             {
@@ -216,6 +247,29 @@ public class UIManager : MonoBehaviour
 
             gameOverCanvasGroup.interactable = true;
             gameOverCanvasGroup.blocksRaycasts = true;
+        });
+    }
+
+    public void GameClear()
+    {
+        gameClearTimeText.text = gameManager.TimeDisplay();
+
+        mainCanvasGroup.DOFade(0f, 0.2f);
+
+        gameClearCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
+        {
+            Time.timeScale = 0f;
+
+            mainCanvasGroup.alpha = 0;
+            mainCanvasGroup.interactable = false;
+            mainCanvasGroup.blocksRaycasts = false;
+
+            pauseCanvasGroup.alpha = 0;
+            pauseCanvasGroup.interactable = false;
+            pauseCanvasGroup.blocksRaycasts = false;
+
+            gameClearCanvasGroup.interactable = true;
+            gameClearCanvasGroup.blocksRaycasts = true;
         });
     }
 }

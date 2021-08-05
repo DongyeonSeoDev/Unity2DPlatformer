@@ -63,6 +63,16 @@ public class GameManager : MonoBehaviour
         Instance.uIManager.GameOver();
     }
 
+    public void GameClear()
+    {
+        if (isPause) return;
+
+        isPause = true;
+        Instance.isEnemyStop = true;
+
+        Instance.uIManager.GameClear();
+    }
+
     public void ReStart()
     {
         DOTween.KillAll();
