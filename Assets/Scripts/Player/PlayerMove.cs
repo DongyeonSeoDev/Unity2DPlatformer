@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
 
         if (transform.position.y < limitMinY && !GameManager.isPause && !GameManager.Instance.isEnemyStop)
         {
-            GameManager.GameOver();
+            GameManager.Instance.GameEnd(eGameStates.gameOver);
         }
     }
 

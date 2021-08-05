@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
+public enum eGameStates
+{
+    gameOver, gameClear
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
@@ -53,24 +58,14 @@ public class GameManager : MonoBehaviour
         time += Time.deltaTime;
     }
 
-    public static void GameOver()
+    public void GameEnd(eGameStates state)
     {
         if (isPause) return;
 
         isPause = true;
         Instance.isEnemyStop = true;
 
-        Instance.uIManager.GameOver();
-    }
-
-    public void GameClear()
-    {
-        if (isPause) return;
-
-        isPause = true;
-        Instance.isEnemyStop = true;
-
-        Instance.uIManager.GameClear();
+        uIManager.GameEnd(state);
     }
 
     public void ReStart()

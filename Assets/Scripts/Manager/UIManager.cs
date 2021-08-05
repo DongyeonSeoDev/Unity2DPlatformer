@@ -12,27 +12,22 @@ public class UIManager : MonoBehaviour
     public CanvasGroup pauseCanvasGroup = null;
     public CanvasGroup mainCanvasGroup = null;
 
-    public Button gameOverReStart = null;
-    public Button gameOverExit = null;
-
-    public Button gameClearReStart = null;
-    public Button gameClearExit = null;
-    public Text gameClearTimeText = null;
-
+    public List<Button> exitButtons = null;
+    public List<Button> reStartButtons = null;
     public Button pauseContinue = null;
-    public Button pauseReStart = null;
-    public Button pauseExit = null;
+
+    public Text timeText = null;
+    public Text gameClearTimeText = null;
 
     public EventTrigger rightButton = null;
     public EventTrigger leftButton = null;
     public Button jumpButton = null;
 
-    public Text timeText = null;
-
     private Dictionary<string, EventTrigger.Entry> eventTriggerDictionary = new Dictionary<string, EventTrigger.Entry>();
 
     private GameManager gameManager = null;
     private PlayerInput playerInput = null;
+    private CanvasGroup gameEndCanvasGroup = null;
 
     private bool isPause = false;
     private bool isPauseTweenComplete = true;
@@ -43,58 +38,49 @@ public class UIManager : MonoBehaviour
         gameManager = GameManager.Instance;
         playerInput = FindObjectOfType<PlayerInput>();
 
-        gameOverReStart.onClick.AddListener(() =>
+        exitButtons.ForEach((exitButton) =>
         {
-            if (isClick)
+            exitButton.onClick.AddListener(() =>
             {
-                return;
-            }
+                if (isClick || !isPauseTweenComplete)
+                {
+                    return;
+                }
 
-            Time.timeScale = 1f;
-            isClick = true;
-
-            gameOverCanvasGroup.DOFade(0.5f, 0.1f).OnComplete(() =>
-            {
-                gameManager.ReStart();
+                isClick = true;
+                gameManager.Exit();
             });
         });
 
-        gameOverExit.onClick.AddListener(() =>
+        reStartButtons.ForEach((reStartButton) =>
         {
-            if (isClick)
+            reStartButton.onClick.AddListener(() =>
             {
-                return;
-            }
+                if (!isPauseTweenComplete || isClick)
+                {
+                    return;
+                }
 
-            gameManager.Exit();
-        });
+                Time.timeScale = 1f;
+                isClick = true;
 
-        gameClearReStart.onClick.AddListener(() =>
-        {
-            if (isClick)
-            {
-                return;
-            }
-
-            Time.timeScale = 1f;
-            isClick = true;
-
-            gameClearCanvasGroup.DOFade(0.5f, 0.1f).OnComplete(() =>
-            {
-                gameManager.ReStart();
+                if (isPause)
+                {
+                    pauseCanvasGroup.DOFade(0f, 0.2f).OnComplete(() =>
+                    {
+                        gameManager.ReStart();
+                    });
+                }
+                else
+                {
+                    gameEndCanvasGroup.DOFade(0f, 0.2f).OnComplete(() =>
+                    {
+                        gameManager.ReStart();
+                    });
+                }
             });
         });
-
-        gameClearExit.onClick.AddListener(() =>
-        {
-            if (isClick)
-            {
-                return;
-            }
-
-            gameManager.Exit();
-        });
-
+        
         pauseContinue.onClick.AddListener(() =>
         {
             if (!isPauseTweenComplete)
@@ -103,32 +89,6 @@ public class UIManager : MonoBehaviour
             }
 
             Pause();
-        });
-
-        pauseReStart.onClick.AddListener(() =>
-        {
-            if (!isPauseTweenComplete && isClick)
-            {
-                return;
-            }
-
-            Time.timeScale = 1f;
-            isClick = true;
-
-            pauseCanvasGroup.DOFade(0.5f, 0.2f).OnComplete(() =>
-            {
-                gameManager.ReStart();
-            });
-        });
-
-        pauseExit.onClick.AddListener(() =>
-        {
-            if (!isPauseTweenComplete)
-            {
-                return;
-            }
-
-            gameManager.Exit();
         });
 
         eventTriggerDictionary.Add("RightButtonDown", new EventTrigger.Entry());
@@ -229,11 +189,21 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void GameOver()
+    public void GameEnd(eGameStates state)
     {
         mainCanvasGroup.DOFade(0f, 0.2f);
 
-        gameOverCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
+        if (state == eGameStates.gameOver)
+        {
+            gameEndCanvasGroup = gameOverCanvasGroup;
+        }
+        else if (state == eGameStates.gameClear)
+        {
+            gameClearTimeText.text = gameManager.TimeDisplay();
+            gameEndCanvasGroup = gameClearCanvasGroup;
+        }
+
+        gameEndCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
         {
             Time.timeScale = 0f;
 
@@ -244,32 +214,10 @@ public class UIManager : MonoBehaviour
             pauseCanvasGroup.alpha = 0;
             pauseCanvasGroup.interactable = false;
             pauseCanvasGroup.blocksRaycasts = false;
+            isPauseTweenComplete = true;
 
-            gameOverCanvasGroup.interactable = true;
-            gameOverCanvasGroup.blocksRaycasts = true;
-        });
-    }
-
-    public void GameClear()
-    {
-        gameClearTimeText.text = gameManager.TimeDisplay();
-
-        mainCanvasGroup.DOFade(0f, 0.2f);
-
-        gameClearCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
-        {
-            Time.timeScale = 0f;
-
-            mainCanvasGroup.alpha = 0;
-            mainCanvasGroup.interactable = false;
-            mainCanvasGroup.blocksRaycasts = false;
-
-            pauseCanvasGroup.alpha = 0;
-            pauseCanvasGroup.interactable = false;
-            pauseCanvasGroup.blocksRaycasts = false;
-
-            gameClearCanvasGroup.interactable = true;
-            gameClearCanvasGroup.blocksRaycasts = true;
+            gameEndCanvasGroup.interactable = true;
+            gameEndCanvasGroup.blocksRaycasts = true;
         });
     }
 }
