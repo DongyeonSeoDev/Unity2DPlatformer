@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public EventTrigger leftButton = null;
     public Button jumpButton = null;
 
+    public Text timeText = null;
+
     private Dictionary<string, EventTrigger.Entry> eventTriggerDictionary = new Dictionary<string, EventTrigger.Entry>();
 
     private GameManager gameManager = null;
@@ -140,6 +142,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        timeText.text = gameManager.TimeDisplay();
+
         if (playerInput.isPause)
         {
             Pause();

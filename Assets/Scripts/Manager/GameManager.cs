@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
     }
 
     private UIManager uIManager = null;
+    private StringBuilder sb = new StringBuilder(8);
+
+    private float time = 0f;
 
     public static bool isPause = false;
 
@@ -40,6 +44,13 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         uIManager = FindObjectOfType<UIManager>();
+    }
+
+    private void Update()
+    {
+        if (isPause) return;
+
+        time += Time.deltaTime;
     }
 
     public static void GameOver()
@@ -63,5 +74,31 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    private string timeCheck(int time)
+    {
+        if (time < 10)
+        {
+            return "0" + time;
+        }
+
+        return time.ToString();
+    }
+
+    public string TimeDisplay()
+    {
+        int minute = (int)time / 60;
+        int second = (int)time - minute * 60;
+        int millisecond = (int)((time - (minute * 60 + second)) * 100);
+
+        sb.Remove(0, sb.Length);
+        sb.Append(timeCheck(minute));
+        sb.Append(':');
+        sb.Append(timeCheck(second));
+        sb.Append(':');
+        sb.Append(timeCheck(millisecond));
+
+        return sb.ToString();
     }
 }
