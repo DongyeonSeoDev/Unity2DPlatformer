@@ -4483,7 +4483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverCanvasGroup: {fileID: 806866785}
   pauseCanvasGroup: {fileID: 294561468}
-  buttonCanvasGroup: {fileID: 478914669}
+  mainCanvasGroup: {fileID: 478914669}
   gameOverReStart: {fileID: 1537613386}
   gameOverExit: {fileID: 1872800601}
   pauseContinue: {fileID: 1602399168}

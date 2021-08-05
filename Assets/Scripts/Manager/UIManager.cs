@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 {
     public CanvasGroup gameOverCanvasGroup = null;
     public CanvasGroup pauseCanvasGroup = null;
-    public CanvasGroup buttonCanvasGroup = null;
+    public CanvasGroup mainCanvasGroup = null;
 
     public Button gameOverReStart = null;
     public Button gameOverExit = null;
@@ -164,23 +164,32 @@ public class UIManager : MonoBehaviour
         if (!isPause)
         {
             Time.timeScale = 1f;
+
+            mainCanvasGroup.interactable = true;
+            mainCanvasGroup.blocksRaycasts = true;
         }
         else
         {
             pauseCanvasGroup.interactable = true;
             pauseCanvasGroup.blocksRaycasts = true;
         }
-
-        buttonCanvasGroup.DOFade(isPause ? 0f : 1f, 0.5f);
+        
+        mainCanvasGroup.DOFade(isPause ? 0f : 1f, 0.5f);
 
         pauseCanvasGroup.DOFade(isPause ? 1f : 0f, 0.5f).OnComplete(() => 
         {
             if (isPause)
             {
                 Time.timeScale = 0f;
+
+                mainCanvasGroup.alpha = 0f;
+                mainCanvasGroup.interactable = false;
+                mainCanvasGroup.blocksRaycasts = false;
             }
             else
             {
+                mainCanvasGroup.alpha = 1f;
+
                 pauseCanvasGroup.interactable = false;
                 pauseCanvasGroup.blocksRaycasts = false;
             }
@@ -191,11 +200,15 @@ public class UIManager : MonoBehaviour
 
     public void GameOver()
     {
-        buttonCanvasGroup.DOFade(0f, 0.2f);
+        mainCanvasGroup.DOFade(0f, 0.2f);
 
         gameOverCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>
         {
             Time.timeScale = 0f;
+
+            mainCanvasGroup.alpha = 0;
+            mainCanvasGroup.interactable = false;
+            mainCanvasGroup.blocksRaycasts = false;
 
             pauseCanvasGroup.alpha = 0;
             pauseCanvasGroup.interactable = false;
