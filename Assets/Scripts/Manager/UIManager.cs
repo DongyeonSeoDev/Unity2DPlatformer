@@ -14,7 +14,9 @@ public class UIManager : MonoBehaviour
 
     public List<Button> exitButtons = null;
     public List<Button> reStartButtons = null;
-    public Button pauseContinue = null;
+
+    public Button coutinueButton = null;
+    public Button pauseButton = null;
 
     public Text timeText = null;
     public Text gameClearTimeText = null;
@@ -81,7 +83,7 @@ public class UIManager : MonoBehaviour
             });
         });
         
-        pauseContinue.onClick.AddListener(() =>
+        coutinueButton.onClick.AddListener(() =>
         {
             if (!isPauseTweenComplete)
             {
@@ -90,6 +92,8 @@ public class UIManager : MonoBehaviour
 
             Pause();
         });
+
+        pauseButton.onClick.AddListener(() => Pause());
 
         eventTriggerDictionary.Add("RightButtonDown", new EventTrigger.Entry());
         eventTriggerDictionary.Add("RightButtonUp", new EventTrigger.Entry());
