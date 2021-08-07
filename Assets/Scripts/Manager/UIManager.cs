@@ -16,14 +16,15 @@ public class UIManager : MonoBehaviour
     public List<Button> reStartButtons = null;
 
     public Button coutinueButton = null;
-    public Button pauseButton = null;
 
     public Text timeText = null;
     public Text gameClearTimeText = null;
 
     public EventTrigger rightButton = null;
     public EventTrigger leftButton = null;
+
     public Button jumpButton = null;
+    public Button pauseButton = null;
 
     private Dictionary<string, EventTrigger.Entry> eventTriggerDictionary = new Dictionary<string, EventTrigger.Entry>();
 
@@ -93,8 +94,6 @@ public class UIManager : MonoBehaviour
             Pause();
         });
 
-        pauseButton.onClick.AddListener(() => Pause());
-
         eventTriggerDictionary.Add("RightButtonDown", new EventTrigger.Entry());
         eventTriggerDictionary.Add("RightButtonUp", new EventTrigger.Entry());
         eventTriggerDictionary.Add("LeftButtonDown", new EventTrigger.Entry());
@@ -129,10 +128,8 @@ public class UIManager : MonoBehaviour
         leftButton.triggers.Add(eventTriggerDictionary["LeftButtonDown"]);
         leftButton.triggers.Add(eventTriggerDictionary["LeftButtonUp"]);
 
-        jumpButton.onClick.AddListener(() =>
-        {
-            playerInput.isJumpButtonClick = true;
-        });
+        jumpButton.onClick.AddListener(() => playerInput.isJumpButtonClick = true);
+        pauseButton.onClick.AddListener(() => playerInput.isPauseButtonClick = true);
     }
 
     private void Update()

@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour
     public bool isRightButtonClick = false;
     public bool isLeftButtonClick = false;
     public bool isJumpButtonClick = false;
+    public bool isPauseButtonClick = false;
 
     private float lastInputTime = 0f;
 
@@ -54,7 +55,13 @@ public class PlayerInput : MonoBehaviour
             isJumpButtonClick = false;
         }
 
-        if (xMove != 0 || isJump)
+        if (isPauseButtonClick)
+        {
+            isPause = true;
+            isPauseButtonClick = false;
+        }
+
+        if (xMove != 0 || isJump || isPause)
         {
             lastInputTime = Time.time;
         }

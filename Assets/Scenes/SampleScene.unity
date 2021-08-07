@@ -1006,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7490517704328507245, guid: d276eb0fef21fe647b191faa041fd861, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d276eb0fef21fe647b191faa041fd861, type: 3}
@@ -1569,7 +1569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7490517704328507245, guid: d276eb0fef21fe647b191faa041fd861, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d276eb0fef21fe647b191faa041fd861, type: 3}
@@ -4596,7 +4596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7490517704328507245, guid: d276eb0fef21fe647b191faa041fd861, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d276eb0fef21fe647b191faa041fd861, type: 3}
@@ -4860,7 +4860,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1498207371}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Waters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5166,12 +5166,12 @@ MonoBehaviour:
   - {fileID: 46128054}
   - {fileID: 2012166484}
   coutinueButton: {fileID: 1602399168}
-  pauseButton: {fileID: 590928379}
   timeText: {fileID: 51731226}
   gameClearTimeText: {fileID: 80495507}
   rightButton: {fileID: 1100568307}
   leftButton: {fileID: 2023816232}
   jumpButton: {fileID: 528295132}
+  pauseButton: {fileID: 590928379}
 --- !u!4 &1573483425
 Transform:
   m_ObjectHideFlags: 0
@@ -5616,6 +5616,7 @@ MonoBehaviour:
   isRightButtonClick: 0
   isLeftButtonClick: 0
   isJumpButtonClick: 0
+  isPauseButtonClick: 0
 --- !u!114 &1801712236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5636,7 +5637,10 @@ MonoBehaviour:
   limitMinY: -10
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 80
+  whatIsWater:
+    serializedVersion: 2
+    m_Bits: 16
 --- !u!95 &1801712237
 Animator:
   serializedVersion: 3

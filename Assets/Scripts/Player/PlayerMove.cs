@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float limitMinY = -10f;
 
     public LayerMask whatIsGround;
+    public LayerMask whatIsWater;
 
     private PlayerInput playerInput = null;
     private PlayerAnimation playerAnimation = null;
@@ -24,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     
     private bool isJump = false;
     private bool isGround = false;
+    private bool isWater = false;
 
     private void Awake()
     {
@@ -68,13 +70,14 @@ public class PlayerMove : MonoBehaviour
         }
 
         isGround = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsGround);
+        isWater = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsWater);
 
         if (isJump)
         {
             if (isGround)
             {
                 playerRigidbody.velocity = Vector2.zero;
-                playerRigidbody.AddForce(jumpforce, ForceMode2D.Impulse);
+                playerRigidbody.AddForce(isWater ? jumpforce / 2 : jumpforce, ForceMode2D.Impulse);
                 playerAnimation.JumpAnimation();
             }
         }
@@ -89,7 +92,7 @@ public class PlayerMove : MonoBehaviour
             playerAnimation.AnimationStart();
         }
 
-        velocity.x = playerInput.xMove * speed;
+        velocity.x = playerInput.xMove * (isWater ? speed / 2 : speed);
 
         if (spriteRenderer.flipX)
         {
