@@ -70,16 +70,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         isGround = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsGround);
-        isWater = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsWater);
+        isWater = isGround ? Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsWater) : isWater;
 
-        if (isJump)
+        if (isJump && isGround)
         {
-            if (isGround)
-            {
-                playerRigidbody.velocity = Vector2.zero;
-                playerRigidbody.AddForce(isWater ? jumpforce / 2 : jumpforce, ForceMode2D.Impulse);
-                playerAnimation.JumpAnimation();
-            }
+            playerRigidbody.velocity = Vector2.zero;
+            playerRigidbody.AddForce(isWater ? jumpforce / 2 : jumpforce, ForceMode2D.Impulse);
+            playerAnimation.JumpAnimation();
         }
 
         if (!isGround && playerRigidbody.velocity.y < 0)
