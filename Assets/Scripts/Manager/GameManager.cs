@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
@@ -78,7 +77,12 @@ public class GameManager : MonoBehaviour
 
     public void Exit()
     {
+
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     private string timeCheck(int time)
