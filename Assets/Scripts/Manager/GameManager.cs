@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public static bool isPause = false;
 
     public bool isEnemyStop = false;
+    public bool isStageSelection = true;
 
     private void Awake()
     {

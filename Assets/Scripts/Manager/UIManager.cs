@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
     public Button jumpButton = null;
     public Button pauseButton = null;
 
+    public GameObject timeIcon = null;
+
     private Dictionary<string, EventTrigger.Entry> eventTriggerDictionary = new Dictionary<string, EventTrigger.Entry>();
 
     private GameManager gameManager = null;
@@ -35,6 +37,7 @@ public class UIManager : MonoBehaviour
     private bool isPause = false;
     private bool isPauseTweenComplete = true;
     private bool isClick = false;
+    private bool isStageSelection = false;
 
     private void Awake()
     {
@@ -132,14 +135,28 @@ public class UIManager : MonoBehaviour
         pauseButton.onClick.AddListener(() => playerInput.isPauseButtonClick = true);
     }
 
+    private void Start()
+    {
+        if (gameManager.isStageSelection)
+        {
+            timeIcon.SetActive(false);
+            isStageSelection = true;
+        }
+    }
+
     private void Update()
     {
-        timeText.text = gameManager.TimeDisplay();
-
         if (playerInput.isPause)
         {
             Pause();
         }
+
+        if (isStageSelection)
+        {
+            return;
+        }
+
+        timeText.text = gameManager.TimeDisplay();
     }
 
     private void Pause()
