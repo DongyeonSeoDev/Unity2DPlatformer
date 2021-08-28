@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     private bool isPause = false;
     private bool isPauseTweenComplete = true;
     private bool isClick = false;
+
     private bool isStageSelection = false;
 
     private void Awake()
@@ -157,6 +158,12 @@ public class UIManager : MonoBehaviour
         }
 
         timeText.text = gameManager.TimeDisplay();
+    }
+
+    public void StageStart()
+    {
+        timeIcon.SetActive(true);
+        isStageSelection = false;
     }
 
     private void Pause()

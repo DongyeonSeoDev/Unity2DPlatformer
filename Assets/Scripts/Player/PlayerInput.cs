@@ -75,4 +75,13 @@ public class PlayerInput : MonoBehaviour
             isBlink = false;
         }
     }
+
+    public void ResetInput()
+    {
+        xMove = 0f;
+        isJump = false;
+        isBlink = false;
+        isPause = false;
+        lastInputTime = Time.time;
+    }
 }

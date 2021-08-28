@@ -23,7 +23,8 @@ public class PlayerMove : MonoBehaviour
 
     private Vector2 velocity = Vector2.zero;
     
-    private bool isJump = false;
+    public bool isJump = false;
+
     private bool isGround = false;
     private bool isWater = false;
 
@@ -108,5 +109,14 @@ public class PlayerMove : MonoBehaviour
 
         velocity.y = playerRigidbody.velocity.y;
         playerRigidbody.velocity = velocity;
+    }
+
+    public void ResetMove(Vector3 position)
+    {
+        playerInput.ResetInput();
+
+        isJump = false;
+        playerRigidbody.velocity = Vector2.zero;
+        transform.position = position;
     }
 }

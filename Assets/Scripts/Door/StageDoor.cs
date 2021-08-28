@@ -26,6 +26,11 @@ public class StageDoor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (!GameManager.Instance.isStageSelection)
+        {
+            return;
+        }
+
         currentTween.Complete();
         currentTween.Kill();
         currentTween = stageText.transform.DOScale(Vector3.zero, 0.5f);

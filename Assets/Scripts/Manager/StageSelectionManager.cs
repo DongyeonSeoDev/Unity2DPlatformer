@@ -6,19 +6,30 @@ using UnityEngine.SceneManagement;
 public class StageSelectionManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] stageName = null;
+    [SerializeField] private Vector3[] stageStartPosition = null;
 
-    private PlayerInput playerInput = null;
+    private PlayerMove playerMove = null;
+
+    private GameManager gameManager = null;
 
     private void Awake()
     {
-        playerInput = FindObjectOfType<PlayerInput>();
+        playerMove = FindObjectOfType<PlayerMove>();
+    }
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
     }
 
     private void Update()
     {
-        if (playerInput.isJump && GameManager.Instance.currentStage != 0)
+        if (playerMove.isJump && gameManager.currentStage != 0)
         {
-            Instantiate(stageName[GameManager.Instance.currentStage + 1], Vector3.zero, Quaternion.identity);
+            Instantiate(stageName[gameManager.currentStage], Vector3.zero, Quaternion.identity);
+            playerMove.ResetMove(stageStartPosition[gameManager.currentStage]);
+
+            gameManager.StageStart();
             stageName[0].SetActive(false);
         }
     }

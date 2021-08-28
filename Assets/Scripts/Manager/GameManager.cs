@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
     {
         if (isPause) return;
 
+        if (isStageSelection)
+        {
+            return;
+        }
+
         time += Time.deltaTime;
     }
 
@@ -86,6 +91,14 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void StageStart()
+    {
+        isStageSelection = false;
+        time = 0f;
+
+        uIManager.StageStart();
     }
 
     private string timeCheck(int time)
