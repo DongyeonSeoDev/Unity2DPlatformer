@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     public static bool isPause = false;
 
+    public int currentStage = 0;
+
     public bool isEnemyStop = false;
     public bool isStageSelection = true;
 
