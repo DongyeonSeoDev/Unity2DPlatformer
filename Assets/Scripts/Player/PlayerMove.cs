@@ -116,7 +116,12 @@ public class PlayerMove : MonoBehaviour
         playerInput.ResetInput();
 
         isJump = false;
+
+        playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
         playerRigidbody.velocity = Vector2.zero;
+
+        spriteRenderer.flipX = false;
+
         transform.position = position;
     }
 }

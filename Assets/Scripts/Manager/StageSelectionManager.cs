@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class StageSelectionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] stageName = null;
+    [SerializeField] private GameObject[] stageObject = null;
     [SerializeField] private Vector3[] stageStartPosition = null;
 
+    private Dictionary<int, GameObject> stages;
     private PlayerMove playerMove = null;
-
     private GameManager gameManager = null;
+
+    private int currentStage = 0;
 
     private void Awake()
     {
@@ -20,17 +22,36 @@ public class StageSelectionManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
+        gameManager.stageReset += () => playerMove.ResetMove(stageStartPosition[gameManager.currentStage]);
+        stages = gameManager.stages;
+
+        stages.Add(0, stageObject[0]);
     }
 
     private void Update()
     {
+        if (!gameManager.isStageSelection)
+        {
+            return;
+        }
+
         if (playerMove.isJump && gameManager.currentStage != 0)
         {
-            Instantiate(stageName[gameManager.currentStage], Vector3.zero, Quaternion.identity);
-            playerMove.ResetMove(stageStartPosition[gameManager.currentStage]);
+            currentStage = gameManager.currentStage;
+
+            if (!stages.ContainsKey(currentStage))
+            {
+                stages.Add(currentStage, Instantiate(stageObject[currentStage], Vector3.zero, Quaternion.identity));
+            }
+            else
+            {
+                stages[currentStage].SetActive(true);
+            }
+            
+            playerMove.ResetMove(stageStartPosition[currentStage]);
 
             gameManager.StageStart();
-            stageName[0].SetActive(false);
+            stageObject[0].SetActive(false);
         }
     }
 }

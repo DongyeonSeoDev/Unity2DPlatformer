@@ -14,6 +14,11 @@ public class EnemyMove : MonoBehaviour
 
     private Tween currentMoveTween = null;
 
+    private void Start()
+    {
+        currentMoveTween = transform.DOMove(nextPositions[currentPosition], 0f);
+    }
+
     private void Update()
     {
         if (GameManager.isPause)
@@ -38,10 +43,34 @@ public class EnemyMove : MonoBehaviour
             currentPosition = (currentPosition + 1) % nextPositions.Length;
             isMove = true;
 
-            currentMoveTween = transform.DOMove(nextPositions[currentPosition], speeds[currentPosition]).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                isMove = false;
-            });
+            currentMoveTween = transform.DOMove(nextPositions[currentPosition], speeds[currentPosition])
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    isMove = false;
+                });
         }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.stageReset += EnemyReset;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.stageReset -= EnemyReset;
+    }
+
+    private void EnemyReset()
+    {
+        currentMoveTween.Complete();
+        currentMoveTween.Kill();
+
+        currentPosition = 0;
+        isMove = false;
+        isPause = false;
+
+        currentMoveTween = transform.DOMove(nextPositions[currentPosition], 0f);
     }
 }

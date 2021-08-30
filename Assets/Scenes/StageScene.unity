@@ -1292,7 +1292,25 @@ MonoBehaviour:
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1523,13 +1541,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ca3e766cfa64a45b65517a7e9487bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageName:
+  stageObject:
   - {fileID: 267180452}
   - {fileID: 6875695687878096092, guid: aa88b74486a29cc469c4b47cacacc698, type: 3}
   stageStartPosition:
   - {x: -7.95, y: -1.493, z: 0}
   - {x: -7.95, y: -2.5, z: 0}
-  playerTransform: {fileID: 1801712232}
 --- !u!1 &569683157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4855,6 +4872,7 @@ MonoBehaviour:
   whatIsWater:
     serializedVersion: 2
     m_Bits: 16
+  isJump: 0
 --- !u!95 &1801712237
 Animator:
   serializedVersion: 3

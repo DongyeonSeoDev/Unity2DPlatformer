@@ -1,8 +1,8 @@
 using System.Text;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.SceneManagement;
-using DG.Tweening;
+using System;
+using System.Collections.Generic;
 
 public enum eGameStates
 {
@@ -32,7 +32,11 @@ public class GameManager : MonoBehaviour
 
     private float time = 0f;
 
+    public Dictionary<int, GameObject> stages = new Dictionary<int, GameObject>();
+
     public static bool isPause = false;
+
+    public event Action stageReset;
 
     public int currentStage = 0;
 
@@ -53,6 +57,16 @@ public class GameManager : MonoBehaviour
         uIManager = FindObjectOfType<UIManager>();
     }
 
+    private void Start()
+    {
+        stageReset += () =>
+        {
+            isPause = false;
+            isEnemyStop = false;
+            time = 0f;
+        };
+    }
+
     private void Update()
     {
         if (isPause) return;
@@ -63,6 +77,14 @@ public class GameManager : MonoBehaviour
         }
 
         time += Time.deltaTime;
+    }
+
+    private void OnDisable()
+    {
+        if (stages[currentStage] != null && stages[currentStage].activeSelf)
+        {
+            stages[currentStage].SetActive(false);
+        }
     }
 
     public void GameEnd(eGameStates state)
@@ -77,14 +99,15 @@ public class GameManager : MonoBehaviour
 
     public void ReStart()
     {
-        DOTween.KillAll();
-
-        isPause = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        stageReset();
     }
 
     public void Exit()
     {
+        if (stages[currentStage].activeSelf)
+        {
+            stages[currentStage].SetActive(false);
+        }
 
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;

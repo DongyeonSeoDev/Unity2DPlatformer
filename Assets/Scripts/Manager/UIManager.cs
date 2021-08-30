@@ -73,17 +73,13 @@ public class UIManager : MonoBehaviour
 
                 if (isPause)
                 {
-                    pauseCanvasGroup.DOFade(0f, 0.2f).OnComplete(() =>
-                    {
-                        gameManager.ReStart();
-                    });
+                    pauseCanvasGroup.DOFade(0f, 0.2f);
+                    ResetUI(pauseCanvasGroup);
                 }
                 else
                 {
-                    gameEndCanvasGroup.DOFade(0f, 0.2f).OnComplete(() =>
-                    {
-                        gameManager.ReStart();
-                    });
+                    gameEndCanvasGroup.DOFade(0f, 0.2f);
+                    ResetUI(gameEndCanvasGroup);
                 }
             });
         });
@@ -160,6 +156,21 @@ public class UIManager : MonoBehaviour
         timeText.text = gameManager.TimeDisplay();
     }
 
+    public void ResetUI(CanvasGroup currentCanvasGroup)
+    {
+        gameManager.ReStart();
+        isClick = false;
+        isPause = false;
+
+        mainCanvasGroup.interactable = true;
+        mainCanvasGroup.blocksRaycasts = true;
+        mainCanvasGroup.alpha = 1f;
+
+        currentCanvasGroup.alpha = 0f;
+        currentCanvasGroup.interactable = false;
+        currentCanvasGroup.blocksRaycasts = false;
+    }
+
     public void StageStart()
     {
         timeIcon.SetActive(true);
@@ -199,6 +210,7 @@ public class UIManager : MonoBehaviour
                 Time.timeScale = 0f;
 
                 mainCanvasGroup.alpha = 0f;
+
                 mainCanvasGroup.interactable = false;
                 mainCanvasGroup.blocksRaycasts = false;
             }

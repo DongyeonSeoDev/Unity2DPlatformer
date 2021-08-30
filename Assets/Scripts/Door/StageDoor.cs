@@ -20,7 +20,7 @@ public class StageDoor : MonoBehaviour
     {
         currentTween.Complete();
         currentTween.Kill();
-        currentTween = stageText.transform.DOScale(currentStageText, 0.5f)
+        currentTween = stageText.transform.DOScale(currentStageText, 0.3f)
             .OnComplete(() => GameManager.Instance.currentStage = stageNumber);
     }
 
@@ -33,7 +33,7 @@ public class StageDoor : MonoBehaviour
 
         currentTween.Complete();
         currentTween.Kill();
-        currentTween = stageText.transform.DOScale(Vector3.zero, 0.5f);
+        currentTween = stageText.transform.DOScale(Vector3.zero, 0.3f);
         GameManager.Instance.currentStage = 0;
     }
 }
