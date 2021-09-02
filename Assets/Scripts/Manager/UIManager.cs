@@ -136,8 +136,7 @@ public class UIManager : MonoBehaviour
     {
         if (gameManager.isStageSelection)
         {
-            timeIcon.SetActive(false);
-            isStageSelection = true;
+            StageSelection();
         }
     }
 
@@ -154,6 +153,12 @@ public class UIManager : MonoBehaviour
         }
 
         timeText.text = gameManager.TimeDisplay();
+    }
+
+    public void StageSelection()
+    {
+        timeIcon.SetActive(false);
+        isStageSelection = true;
     }
 
     public void ResetUI(CanvasGroup currentCanvasGroup)

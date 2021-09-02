@@ -87,6 +87,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StageSelection()
+    {
+        stages[currentStage].SetActive(false);
+        currentStage = 0;
+        stages[currentStage].SetActive(true);
+        isStageSelection = true;
+        uIManager.StageSelection();
+        stageReset();
+    }
+
     public void GameEnd(eGameStates state)
     {
         if (isPause) return;

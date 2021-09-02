@@ -36,4 +36,9 @@ public class StageDoor : MonoBehaviour
         currentTween = stageText.transform.DOScale(Vector3.zero, 0.3f);
         GameManager.Instance.currentStage = 0;
     }
+
+    private void OnDisable()
+    {
+        stageText.transform.localScale = Vector3.zero;
+    }
 }
