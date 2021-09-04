@@ -81,10 +81,18 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (stages[currentStage] != null && stages[currentStage].activeSelf)
+        if (stages.ContainsKey(currentStage))
         {
-            stages[currentStage].SetActive(false);
+            if (stages[currentStage] != null && stages[currentStage].activeSelf)
+            {
+                stages[currentStage].SetActive(false);
+            }
         }
+    }
+
+    public void ReStart()
+    {
+        stageReset();
     }
 
     public void StageSelection()
@@ -94,22 +102,6 @@ public class GameManager : MonoBehaviour
         stages[currentStage].SetActive(true);
         isStageSelection = true;
         uIManager.StageSelection();
-        stageReset();
-    }
-
-    public void GameEnd(eGameStates state)
-    {
-        if (isPause) return;
-
-        isPause = true;
-        Instance.isEnemyStop = true;
-
-        uIManager.GameEnd(state);
-    }
-
-    public void ReStart()
-    {
-        stageReset();
     }
 
     public void Exit()
@@ -132,6 +124,15 @@ public class GameManager : MonoBehaviour
         time = 0f;
 
         uIManager.StageStart();
+    }
+    public void GameEnd(eGameStates state)
+    {
+        if (isPause) return;
+
+        isPause = true;
+        Instance.isEnemyStop = true;
+
+        uIManager.GameEnd(state);
     }
 
     private string timeCheck(int time)

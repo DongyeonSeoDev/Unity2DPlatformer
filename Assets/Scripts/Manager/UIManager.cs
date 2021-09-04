@@ -7,15 +7,15 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    public CanvasGroup mainCanvasGroup = null;
+    public CanvasGroup pauseCanvasGroup = null;
     public CanvasGroup gameOverCanvasGroup = null;
     public CanvasGroup gameClearCanvasGroup = null;
-    public CanvasGroup pauseCanvasGroup = null;
-    public CanvasGroup mainCanvasGroup = null;
-
-    public List<Button> exitButtons = null;
-    public List<Button> reStartButtons = null;
 
     public Button coutinueButton = null;
+    public Button[] reStartButtons = null;
+    public Button[] stageSelectionButtons = null;
+    public Button[] exitButtons = null;
 
     public Text timeText = null;
     public Text gameClearTimeText = null;
@@ -45,7 +45,64 @@ public class UIManager : MonoBehaviour
         gameManager = GameManager.Instance;
         playerInput = FindObjectOfType<PlayerInput>();
 
-        exitButtons.ForEach((exitButton) =>
+        coutinueButton.onClick.AddListener(() =>
+        {
+            if (!isPauseTweenComplete)
+            {
+                return;
+            }
+
+            Pause();
+        });
+
+        foreach (Button reStartButton in reStartButtons)
+        {
+            reStartButton.onClick.AddListener(() =>
+            {
+                if (isClick || !isPauseTweenComplete)
+                {
+                    return;
+                }
+
+                Time.timeScale = 1f;
+                isClick = true;
+
+                if (isPause)
+                {
+                    ResetUI(pauseCanvasGroup);
+                }
+                else
+                {
+                    ResetUI(gameEndCanvasGroup);
+                }
+            });
+        }
+
+        foreach (Button stageSelectionButton in stageSelectionButtons)
+        {
+            stageSelectionButton.onClick.AddListener(() =>
+            {
+                if (isClick || !isPauseTweenComplete)
+                {
+                    return;
+                }
+
+                isClick = true;
+                Time.timeScale = 1f;
+                gameManager.StageSelection();
+
+                if (isPause)
+                {
+                    ResetUI(pauseCanvasGroup);
+                }
+                else
+                {
+                    ResetUI(gameEndCanvasGroup);
+                }
+            });
+        }
+
+        foreach (Button exitButton in exitButtons)
         {
             exitButton.onClick.AddListener(() =>
             {
@@ -57,42 +114,7 @@ public class UIManager : MonoBehaviour
                 isClick = true;
                 gameManager.Exit();
             });
-        });
-
-        reStartButtons.ForEach((reStartButton) =>
-        {
-            reStartButton.onClick.AddListener(() =>
-            {
-                if (!isPauseTweenComplete || isClick)
-                {
-                    return;
-                }
-
-                Time.timeScale = 1f;
-                isClick = true;
-
-                if (isPause)
-                {
-                    pauseCanvasGroup.DOFade(0f, 0.2f);
-                    ResetUI(pauseCanvasGroup);
-                }
-                else
-                {
-                    gameEndCanvasGroup.DOFade(0f, 0.2f);
-                    ResetUI(gameEndCanvasGroup);
-                }
-            });
-        });
-        
-        coutinueButton.onClick.AddListener(() =>
-        {
-            if (!isPauseTweenComplete)
-            {
-                return;
-            }
-
-            Pause();
-        });
+        }
 
         eventTriggerDictionary.Add("RightButtonDown", new EventTrigger.Entry());
         eventTriggerDictionary.Add("RightButtonUp", new EventTrigger.Entry());
@@ -163,7 +185,6 @@ public class UIManager : MonoBehaviour
 
     public void ResetUI(CanvasGroup currentCanvasGroup)
     {
-        gameManager.ReStart();
         isClick = false;
         isPause = false;
 
@@ -174,6 +195,8 @@ public class UIManager : MonoBehaviour
         currentCanvasGroup.alpha = 0f;
         currentCanvasGroup.interactable = false;
         currentCanvasGroup.blocksRaycasts = false;
+
+        gameManager.ReStart();
     }
 
     public void StageStart()
