@@ -47,10 +47,10 @@ public class StageSelectionManager : MonoBehaviour
             {
                 stages[currentStage].SetActive(true);
             }
-            
-            playerMove.ResetMove(stageStartPosition[currentStage]);
 
+            gameManager.ReStart();
             gameManager.StageStart();
+
             stageObject[0].SetActive(false);
         }
     }
