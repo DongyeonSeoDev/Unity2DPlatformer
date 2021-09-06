@@ -3693,6 +3693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a415239e38118b40a634bdb9e835e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStageDoor: {fileID: 0}
   currentStage: 0
   isEnemyStop: 0
   isStageSelection: 1
@@ -4368,6 +4369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageText: {fileID: 823277516}
+  clearSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  doorSignSpriteRender: {fileID: 1155552357}
   currentStageText: {x: 0.5, y: 0.5, z: 0.5}
   stageNumber: 1
 --- !u!1 &1393656213

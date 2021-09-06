@@ -266,6 +266,7 @@ public class UIManager : MonoBehaviour
         {
             gameClearTimeText.text = gameManager.TimeDisplay();
             gameEndCanvasGroup = gameClearCanvasGroup;
+            gameManager.currentStageDoor.Clear();
         }
 
         gameEndCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>

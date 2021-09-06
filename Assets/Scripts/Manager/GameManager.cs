@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public event Action stageReset;
 
+    public StageDoor currentStageDoor = null;
     public int currentStage = 0;
 
     public bool isEnemyStop = false;
