@@ -6,7 +6,6 @@ using DG.Tweening;
 public class StartSceneManager : MonoBehaviour
 {
     [SerializeField] private Button startButton = null;
-    [SerializeField] private Button exitButton = null;
 
     [SerializeField] private GameObject uI = null;
     [SerializeField] private CanvasGroup uICanvasGroup = null;
@@ -31,11 +30,6 @@ public class StartSceneManager : MonoBehaviour
                 DOTween.KillAll();
                 SceneManager.LoadScene("StageScene");
             });
-        });
-
-        exitButton.onClick.AddListener(() =>
-        {
-            GameManager.Instance.Exit();
         });
     }
 }
