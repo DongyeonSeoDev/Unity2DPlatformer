@@ -35,6 +35,16 @@ public class StageSelectionManager : MonoBehaviour
             return;
         }
 
+        #region DEBUG
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            gameManager.currentStage = 2;
+            playerMove.isJump = true;
+        }
+
+        #endregion
+
         if (playerMove.isJump && gameManager.currentStage != 0)
         {
             currentStage = gameManager.currentStage;

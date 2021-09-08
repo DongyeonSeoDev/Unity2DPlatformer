@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class CameraReset : MonoBehaviour
 {
-    [SerializeField] private Camera mainCamera = null;
     [SerializeField] private Vector3[] cameraStartPosition = null;
+    [SerializeField] private float[] cameraResetTime = null;
 
+    private Camera mainCamera = null;
     private Camera temporaryCamera = null;
 
     private void Awake()
     {
+        mainCamera = Camera.main;
         temporaryCamera = GetComponent<Camera>();
     }
 
@@ -21,7 +23,7 @@ public class CameraReset : MonoBehaviour
             transform.position = cameraStartPosition[GameManager.Instance.currentStage];
             temporaryCamera.enabled = true;
             mainCamera.enabled = false;
-            Invoke("Complete", 1f);
+            Invoke("Complete", cameraResetTime[GameManager.Instance.currentStage]);
         };
     }
 
