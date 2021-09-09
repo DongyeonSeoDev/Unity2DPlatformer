@@ -45,6 +45,7 @@ public class EnemyMove : MonoBehaviour
 
             currentMoveTween = transform.DOMove(nextPositions[currentPosition], speeds[currentPosition])
                 .SetEase(Ease.Linear)
+                .SetUpdate(UpdateType.Fixed)
                 .OnComplete(() =>
                 {
                     isMove = false;

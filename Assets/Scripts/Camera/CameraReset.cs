@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CameraReset : MonoBehaviour
 {
-    [SerializeField] private Vector3[] cameraStartPosition = null;
-    [SerializeField] private float[] cameraResetTime = null;
+    [SerializeField] private Vector3 cameraStartPosition = Vector3.zero;
 
     private Camera mainCamera = null;
     private Camera temporaryCamera = null;
@@ -20,10 +19,10 @@ public class CameraReset : MonoBehaviour
     {
         GameManager.Instance.stageReset += () =>
         {
-            transform.position = cameraStartPosition[GameManager.Instance.currentStage];
+            transform.position = cameraStartPosition;
             temporaryCamera.enabled = true;
             mainCamera.enabled = false;
-            Invoke("Complete", cameraResetTime[GameManager.Instance.currentStage]);
+            Invoke("Complete", 1f);
         };
     }
 
