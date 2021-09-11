@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class StageSelectionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] stageObject = null;
-    [SerializeField] private Vector3[] stageStartPosition = null;
+    public Stage[] stages = null;
 
-    private Dictionary<int, GameObject> stages;
     private PlayerMove playerMove = null;
     private GameManager gameManager = null;
 
@@ -22,11 +20,8 @@ public class StageSelectionManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Instance;
-        gameManager.stageReset += () => playerMove.ResetMove(stageStartPosition[gameManager.currentStage]);
         stages = gameManager.stages;
-
-        stages.Add(0, stageObject[0]);
-        gameManager.isStageClear[0] = true;
+        gameManager.stageReset += () => playerMove.ResetMove(stages[gameManager.currentStage].stageStartPosition);
     }
 
     private void Update()
@@ -38,26 +33,26 @@ public class StageSelectionManager : MonoBehaviour
 
         if (playerMove.isJump && gameManager.currentStage != 0)
         {
-            if (!gameManager.isStageClear[gameManager.currentStage - 1])
+            if (!stages[gameManager.currentStage - 1].isStageClear)
             {
                 return;
             }
 
             currentStage = gameManager.currentStage;
 
-            if (!stages.ContainsKey(currentStage))
+            if (stages[currentStage].stageObject == null)
             {
-                stages.Add(currentStage, Instantiate(stageObject[currentStage], Vector3.zero, Quaternion.identity));
+                stages[currentStage].stageObject = Instantiate(stages[currentStage].stagePrefab, Vector3.zero, Quaternion.identity);
             }
             else
             {
-                stages[currentStage].SetActive(true);
+                stages[currentStage].stageObject.SetActive(true);
             }
 
             gameManager.ReStart();
             gameManager.StageStart();
 
-            stageObject[0].SetActive(false);
+            stages[0].stageObject.SetActive(false);
         }
     }
 }

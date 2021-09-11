@@ -27,13 +27,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public Stage[] stages = null;
+
     private UIManager uIManager = null;
     private StringBuilder sb = new StringBuilder(8);
 
     private float time = 0f;
-
-    public Dictionary<int, GameObject> stages = new Dictionary<int, GameObject>();
-    public bool[] isStageClear = new bool[3];
 
     public static bool isPause = false;
 
@@ -83,12 +82,9 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (stages.ContainsKey(currentStage))
+        if (stages[currentStage].stageObject != null && stages[currentStage].stageObject.activeSelf)
         {
-            if (stages[currentStage] != null && stages[currentStage].activeSelf)
-            {
-                stages[currentStage].SetActive(false);
-            }
+            stages[currentStage].stageObject.SetActive(false);
         }
     }
 
@@ -99,18 +95,18 @@ public class GameManager : MonoBehaviour
 
     public void StageSelection()
     {
-        stages[currentStage].SetActive(false);
+        stages[currentStage].stageObject.SetActive(false);
         currentStage = 0;
-        stages[currentStage].SetActive(true);
+        stages[currentStage].stageObject.SetActive(true);
         isStageSelection = true;
         uIManager.StageSelection();
     }
 
     public void Exit()
     {
-        if (stages[currentStage].activeSelf)
+        if (stages[currentStage].stageObject != null && stages[currentStage].stageObject.activeSelf)
         {
-            stages[currentStage].SetActive(false);
+            stages[currentStage].stageObject.SetActive(false);
         }
 
 #if UNITY_EDITOR
