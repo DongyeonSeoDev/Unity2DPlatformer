@@ -7,6 +7,27 @@ using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager instance = null;
+
+    public static UIManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.LogError("UIManager instance가 없습니다.");
+                return null;
+            }
+
+            return instance;
+        }
+    }
+
+    [Header("DoorSign")]
+    public Sprite clearDoorSign = null;
+    public Sprite openDoorSign = null;
+
+    [Header(" ")]
     public CanvasGroup mainCanvasGroup = null;
     public CanvasGroup pauseCanvasGroup = null;
     public CanvasGroup gameOverCanvasGroup = null;
@@ -42,7 +63,15 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = GameManager.Instance;
+        if (instance != null)
+        {
+            Debug.LogError("다수의 UI매니저가 실행되고 있습니다.");
+            Destroy(this);
+            return;
+        }
+
+        instance = this;
+
         playerInput = FindObjectOfType<PlayerInput>();
 
         coutinueButton.onClick.AddListener(() =>
@@ -156,6 +185,8 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GameManager.Instance;
+
         if (gameManager.isStageSelection)
         {
             StageSelection();
@@ -267,6 +298,7 @@ public class UIManager : MonoBehaviour
             gameClearTimeText.text = gameManager.TimeDisplay();
             gameEndCanvasGroup = gameClearCanvasGroup;
             gameManager.currentStageDoor.Clear();
+            gameManager.isStageClear[gameManager.currentStage] = true;
         }
 
         gameEndCanvasGroup.DOFade(1f, 0.2f).OnComplete(() =>

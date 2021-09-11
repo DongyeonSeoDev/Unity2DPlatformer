@@ -6,7 +6,7 @@ using DG.Tweening;
 public class StageDoor : MonoBehaviour
 {
     [SerializeField] private GameObject stageText = null;
-    [SerializeField] private Sprite clearSign = null;
+    [SerializeField] private StageDoor nextDoor = null;
     [SerializeField] private SpriteRenderer doorSignSpriteRender = null;
     [SerializeField] private Vector3 currentStageText = Vector3.zero;
     [SerializeField] private int stageNumber = 0;
@@ -58,6 +58,11 @@ public class StageDoor : MonoBehaviour
         }
 
         isclear = true;
-        doorSignSpriteRender.sprite = clearSign;
+        doorSignSpriteRender.sprite = UIManager.Instance.clearDoorSign;
+
+        if (nextDoor != null)
+        {
+            nextDoor.doorSignSpriteRender.sprite = UIManager.Instance.openDoorSign;
+        }
     }
 }

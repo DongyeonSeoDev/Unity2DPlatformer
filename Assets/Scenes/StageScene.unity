@@ -1993,7 +1993,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  m_Sprite: {fileID: -6519106895325619043, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4012,7 +4012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360.8, y: 7.5}
+  m_AnchoredPosition: {x: -362, y: 7.5}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &823277518
@@ -4203,6 +4203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a415239e38118b40a634bdb9e835e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStageClear: 000000
   currentStageDoor: {fileID: 0}
   currentStage: 0
   isEnemyStop: 0
@@ -4314,7 +4315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageText: {fileID: 1453962084}
-  clearSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  nextDoor: {fileID: 0}
   doorSignSpriteRender: {fileID: 659329290}
   currentStageText: {x: 0.5, y: 0.5, z: 0.5}
   stageNumber: 2
@@ -4831,7 +4832,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.5, y: 0}
   m_SizeDelta: {x: 140, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1238565710
@@ -4949,7 +4950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageText: {fileID: 823277516}
-  clearSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  nextDoor: {fileID: 864940629}
   doorSignSpriteRender: {fileID: 1155552357}
   currentStageText: {x: 0.5, y: 0.5, z: 0.5}
   stageNumber: 1
@@ -5168,7 +5169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -184, y: 7.5}
+  m_AnchoredPosition: {x: -182, y: 7.5}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453962086
@@ -5560,6 +5561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8f6151ebd8ed24aa3b1bdf642e40b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clearDoorSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  openDoorSign: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
   mainCanvasGroup: {fileID: 478914669}
   pauseCanvasGroup: {fileID: 294561468}
   gameOverCanvasGroup: {fileID: 806866785}
@@ -5632,7 +5635,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.5, y: 0}
   m_SizeDelta: {x: 140, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595910683

@@ -26,6 +26,7 @@ public class StageSelectionManager : MonoBehaviour
         stages = gameManager.stages;
 
         stages.Add(0, stageObject[0]);
+        gameManager.isStageClear[0] = true;
     }
 
     private void Update()
@@ -35,18 +36,13 @@ public class StageSelectionManager : MonoBehaviour
             return;
         }
 
-        #region DEBUG
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            gameManager.currentStage = 2;
-            playerMove.isJump = true;
-        }
-
-        #endregion
-
         if (playerMove.isJump && gameManager.currentStage != 0)
         {
+            if (!gameManager.isStageClear[gameManager.currentStage - 1])
+            {
+                return;
+            }
+
             currentStage = gameManager.currentStage;
 
             if (!stages.ContainsKey(currentStage))

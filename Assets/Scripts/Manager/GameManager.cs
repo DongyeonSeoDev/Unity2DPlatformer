@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         {
             if (instance == null)
             {
-                Debug.LogError("instance가 없습니다.");
+                Debug.LogError("GameManager instance가 없습니다.");
                 return null;
             }
 
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     private float time = 0f;
 
     public Dictionary<int, GameObject> stages = new Dictionary<int, GameObject>();
+    public bool[] isStageClear = new bool[3];
 
     public static bool isPause = false;
 
@@ -54,12 +55,12 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-
-        uIManager = FindObjectOfType<UIManager>();
     }
 
     private void Start()
     {
+        uIManager = UIManager.Instance;
+
         stageReset += () =>
         {
             isPause = false;
