@@ -5,26 +5,30 @@ using DG.Tweening;
 
 public class StageDoor : MonoBehaviour
 {
-    [SerializeField] private GameObject stageText = null;
-    [SerializeField] private StageDoor nextDoor = null;
-    [SerializeField] private SpriteRenderer doorSignSpriteRender = null;
-    [SerializeField] private Vector3 currentStageText = Vector3.zero;
     [SerializeField] private int stageNumber = 0;
 
-    private bool isclear = false;
+    private Stage[] stages = null;
 
     private Tween currentTween = null;
 
+    private Vector3 currentStageTextSize = new Vector3(0.5f, 0.5f, 0.5f);
+
     private void Start()
     {
-        currentTween = stageText.transform.DOScale(Vector3.zero, 0f);
+        stages = GameManager.Instance.stages;
+        currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!GameManager.Instance.stages[stageNumber - 1].isStageClear)
+        {
+            return;
+        }
+
         currentTween.Complete();
         currentTween.Kill();
-        currentTween = stageText.transform.DOScale(currentStageText, 0.3f)
+        currentTween = stages[stageNumber].stageSign.transform.DOScale(currentStageTextSize, 0.3f)
             .OnComplete(() => 
             {
                 GameManager.Instance.currentStage = stageNumber;
@@ -34,35 +38,35 @@ public class StageDoor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!GameManager.Instance.isStageSelection)
+        if (!GameManager.Instance.isStageSelection || !GameManager.Instance.stages[stageNumber - 1].isStageClear)
         {
             return;
         }
 
         currentTween.Complete();
         currentTween.Kill();
-        currentTween = stageText.transform.DOScale(Vector3.zero, 0.3f);
+        currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0.3f);
         GameManager.Instance.currentStage = 0;
     }
 
     private void OnDisable()
     {
-        stageText.transform.localScale = Vector3.zero;
+        stages[stageNumber].stageSign.transform.localScale = Vector3.zero;
     }
 
     public void Clear()
     {
-        if (isclear)
+        if (stages[stageNumber].isStageClear)
         {
             return;
         }
 
-        isclear = true;
-        doorSignSpriteRender.sprite = UIManager.Instance.clearDoorSign;
+        stages[stageNumber].isStageClear = true;
+        stages[stageNumber].doorSignSpriteRender.sprite = UIManager.Instance.clearDoorSign;
 
-        if (nextDoor != null)
+        if (stageNumber + 1 < stages.Length)
         {
-            nextDoor.doorSignSpriteRender.sprite = UIManager.Instance.openDoorSign;
+            stages[stageNumber + 1].doorSignSpriteRender.sprite = UIManager.Instance.openDoorSign;
         }
     }
 }
