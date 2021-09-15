@@ -16,7 +16,8 @@ public class EnemyMove : MonoBehaviour
 
     private void Start()
     {
-        currentMoveTween = transform.DOMove(nextPositions[currentPosition], 0f);
+        currentMoveTween = transform.DOMove(nextPositions[currentPosition], 0.01f);
+        transform.position = nextPositions[currentPosition];
     }
 
     private void Update()
@@ -67,11 +68,13 @@ public class EnemyMove : MonoBehaviour
     {
         currentMoveTween.Complete();
         currentMoveTween.Kill();
+        currentMoveTween = null;
 
         currentPosition = 0;
         isMove = false;
         isPause = false;
 
-        currentMoveTween = transform.DOMove(nextPositions[currentPosition], 0f);
+        currentMoveTween = transform.DOMove(nextPositions[currentPosition], 0.01f);
+        transform.position = nextPositions[currentPosition];
     }
 }

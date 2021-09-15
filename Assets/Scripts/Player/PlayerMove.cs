@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 velocity = Vector2.zero;
     
     public bool isJump = false;
+    public bool isJumpforce = false;
 
     private bool isGround = false;
     private bool isWater = false;
@@ -73,8 +74,9 @@ public class PlayerMove : MonoBehaviour
         isGround = Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsGround);
         isWater = isGround ? Physics2D.OverlapCircle(groundCheckTransform.position, 0.1f, whatIsWater) : isWater;
 
-        if (isJump && isGround)
+        if (isJump && isGround && !isJumpforce)
         {
+            isJumpforce = true;
             playerRigidbody.velocity = Vector2.zero;
             playerRigidbody.AddForce(isWater ? jumpforce / 2 : jumpforce, ForceMode2D.Impulse);
             playerAnimation.JumpAnimation();
@@ -84,6 +86,12 @@ public class PlayerMove : MonoBehaviour
         {
             playerAnimation.DownAnimation();
             isJump = false;
+            isJumpforce = false;
+        }
+        else if (isJump)
+        {
+            isJump = false;
+            isJumpforce = false;
         }
         else if (!isJump)
         {
@@ -116,6 +124,7 @@ public class PlayerMove : MonoBehaviour
         playerInput.ResetInput();
 
         isJump = false;
+        isJumpforce = false;
 
         playerRigidbody.bodyType = RigidbodyType2D.Dynamic;
         playerRigidbody.velocity = Vector2.zero;
