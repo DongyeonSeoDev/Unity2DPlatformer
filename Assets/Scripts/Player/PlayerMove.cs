@@ -93,7 +93,7 @@ public class PlayerMove : MonoBehaviour
             isJump = false;
             isJumpforce = false;
         }
-        else if (!isJump)
+        else if (!isJump && isGround)
         {
             playerAnimation.AnimationStart();
         }
