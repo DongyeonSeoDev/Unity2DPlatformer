@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
 
     public Button jumpButton = null;
     public Button pauseButton = null;
+    public Button stageStartButton = null;
 
     public GameObject timeIcon = null;
 
@@ -181,6 +182,7 @@ public class UIManager : MonoBehaviour
 
         jumpButton.onClick.AddListener(() => playerInput.isJumpButtonClick = true);
         pauseButton.onClick.AddListener(() => playerInput.isPauseButtonClick = true);
+        stageStartButton.onClick.AddListener(() => playerInput.isStageStartButtonClick = true);
     }
 
     private void Start()

@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     public LayerMask whatIsGround;
     public LayerMask whatIsWater;
 
-    private PlayerInput playerInput = null;
+    public PlayerInput playerInput = null;
     private PlayerAnimation playerAnimation = null;
 
     private SpriteRenderer spriteRenderer = null;
@@ -121,8 +121,6 @@ public class PlayerMove : MonoBehaviour
 
     public void ResetMove(Vector3 position)
     {
-        playerInput.ResetInput();
-
         isJump = false;
         isJumpforce = false;
 

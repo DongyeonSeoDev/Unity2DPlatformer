@@ -8,6 +8,7 @@ public class StageSelectionManager : MonoBehaviour
     public Stage[] stages = null;
 
     private PlayerMove playerMove = null;
+    private PlayerInput playerInput = null;
     private GameManager gameManager = null;
 
     private int currentStage = 0;
@@ -19,9 +20,15 @@ public class StageSelectionManager : MonoBehaviour
 
     private void Start()
     {
+        playerInput = playerMove.playerInput;
+
         gameManager = GameManager.Instance;
         stages = gameManager.stages;
-        gameManager.stageReset += () => playerMove.ResetMove(stages[gameManager.currentStage].stageStartPosition);
+        gameManager.stageReset += () => 
+        {
+            playerMove.ResetMove(stages[gameManager.currentStage].stageStartPosition);
+            playerInput.ResetInput();
+        };
     }
 
     private void Update()
@@ -31,7 +38,7 @@ public class StageSelectionManager : MonoBehaviour
             return;
         }
 
-        if (playerMove.isJump && gameManager.currentStage != 0)
+        if (playerInput.isStagetSart && gameManager.currentStage != 0)
         {
             if (!stages[gameManager.currentStage - 1].isStageClear)
             {
