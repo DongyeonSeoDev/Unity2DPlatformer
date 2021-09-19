@@ -48,6 +48,8 @@ public class UIManager : MonoBehaviour
     public Button pauseButton = null;
     public Button stageStartButton = null;
 
+    public Tween stageStartButtonTween = null;
+
     public GameObject timeIcon = null;
 
     private Dictionary<string, EventTrigger.Entry> eventTriggerDictionary = new Dictionary<string, EventTrigger.Entry>();
@@ -183,6 +185,8 @@ public class UIManager : MonoBehaviour
         jumpButton.onClick.AddListener(() => playerInput.isJumpButtonClick = true);
         pauseButton.onClick.AddListener(() => playerInput.isPauseButtonClick = true);
         stageStartButton.onClick.AddListener(() => playerInput.isStageStartButtonClick = true);
+
+        stageStartButtonTween = stageStartButton.transform.DOScale(Vector3.zero, 0f);
     }
 
     private void Start()

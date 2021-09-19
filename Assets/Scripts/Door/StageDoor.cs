@@ -9,19 +9,25 @@ public class StageDoor : MonoBehaviour
 
     private Stage[] stages = null;
 
+    private GameManager gameManager = null;
+    private UIManager uIManager = null;
+
     private Tween currentTween = null;
 
     private Vector3 currentStageTextSize = new Vector3(0.5f, 0.5f, 0.5f);
 
     private void Start()
     {
-        stages = GameManager.Instance.stages;
+        gameManager = GameManager.Instance;
+        uIManager = UIManager.Instance;
+
+        stages = gameManager.stages;
         currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!GameManager.Instance.stages[stageNumber - 1].isStageClear)
+        if (!gameManager.stages[stageNumber - 1].isStageClear)
         {
             return;
         }
@@ -31,14 +37,17 @@ public class StageDoor : MonoBehaviour
         currentTween = stages[stageNumber].stageSign.transform.DOScale(currentStageTextSize, 0.3f)
             .OnComplete(() => 
             {
-                GameManager.Instance.currentStage = stageNumber;
-                GameManager.Instance.currentStageDoor = this;
+                gameManager.currentStage = stageNumber;
+                gameManager.currentStageDoor = this;
             });
+
+        uIManager.stageStartButtonTween.Complete();
+        uIManager.stageStartButtonTween = uIManager.stageStartButton.transform.DOScale(Vector3.one, 0.3f);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!GameManager.Instance.isStageSelection || !GameManager.Instance.stages[stageNumber - 1].isStageClear)
+        if (!gameManager.isStageSelection || !gameManager.stages[stageNumber - 1].isStageClear)
         {
             return;
         }
@@ -46,12 +55,16 @@ public class StageDoor : MonoBehaviour
         currentTween.Complete();
         currentTween.Kill();
         currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0.3f);
-        GameManager.Instance.currentStage = 0;
+        gameManager.currentStage = 0;
+
+        uIManager.stageStartButtonTween.Complete();
+        uIManager.stageStartButtonTween = uIManager.stageStartButton.transform.DOScale(Vector3.zero, 0.3f);
     }
 
     private void OnDisable()
     {
         stages[stageNumber].stageSign.transform.localScale = Vector3.zero;
+        uIManager.stageStartButton.transform.localScale = Vector3.zero;
     }
 
     public void Clear()
@@ -62,11 +75,11 @@ public class StageDoor : MonoBehaviour
         }
 
         stages[stageNumber].isStageClear = true;
-        stages[stageNumber].doorSignSpriteRender.sprite = UIManager.Instance.clearDoorSign;
+        stages[stageNumber].doorSignSpriteRender.sprite = uIManager.clearDoorSign;
 
         if (stageNumber + 1 < stages.Length)
         {
-            stages[stageNumber + 1].doorSignSpriteRender.sprite = UIManager.Instance.openDoorSign;
+            stages[stageNumber + 1].doorSignSpriteRender.sprite = uIManager.openDoorSign;
         }
     }
 }
