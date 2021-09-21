@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class StageDoor : MonoBehaviour
 {
@@ -63,8 +64,16 @@ public class StageDoor : MonoBehaviour
 
     private void OnDisable()
     {
-        stages[stageNumber].stageSign.transform.localScale = Vector3.zero;
-        uIManager.stageStartButton.transform.localScale = Vector3.zero;
+        try
+        {
+            stages[stageNumber].stageSign.transform.localScale = Vector3.zero;
+            uIManager.stageStartButton.transform.localScale = Vector3.zero;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e);
+            return;
+        }
     }
 
     public void Clear()

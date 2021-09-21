@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
         {
             if (instance == null)
             {
-                Debug.LogError("UIManager instance가 없습니다.");
+                Debug.Log("UIManager instance가 없습니다.");
                 return null;
             }
 
