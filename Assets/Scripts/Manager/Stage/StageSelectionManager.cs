@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StageSelectionManager : MonoBehaviour
 {
+    [HideInInspector]
     public Stage[] stages = null;
 
     private PlayerMove playerMove = null;

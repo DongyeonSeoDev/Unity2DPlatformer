@@ -89,6 +89,7 @@ public class StageDoor : MonoBehaviour
         if (stageNumber + 1 < stages.Length)
         {
             stages[stageNumber + 1].doorSignSpriteRender.sprite = uIManager.openDoorSign;
+            stages[stageNumber + 1].lockDoorSign.SetActive(false);
         }
     }
 }

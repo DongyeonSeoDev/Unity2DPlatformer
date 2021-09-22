@@ -626,7 +626,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: a52c61e4d863eb24eb1a6cec742bd3ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1104,7 +1104,7 @@ Transform:
   - {fileID: 1393656215}
   - {fileID: 1852898126}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &287578171
 PrefabInstance:
@@ -1175,6 +1175,11 @@ Transform:
 --- !u!212 &287578173 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 147334884786269005, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+  m_PrefabInstance: {fileID: 287578171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &287578174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5356625994206220131, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
   m_PrefabInstance: {fileID: 287578171}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &294561466
@@ -4386,6 +4391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 860587958}
   - component: {fileID: 860587957}
+  - component: {fileID: 860587960}
   - component: {fileID: 860587959}
   m_Layer: 0
   m_Name: ManagerObjects
@@ -4410,6 +4416,7 @@ MonoBehaviour:
   - stageObject: {fileID: 267180452}
     stagePrefab: {fileID: 0}
     stageSign: {fileID: 0}
+    lockDoorSign: {fileID: 0}
     doorSignSpriteRender: {fileID: 0}
     stageStartPosition: {x: -7.95, y: -1.478, z: 0}
     stageNumber: 0
@@ -4417,6 +4424,7 @@ MonoBehaviour:
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 6875695687878096092, guid: aa88b74486a29cc469c4b47cacacc698, type: 3}
     stageSign: {fileID: 1221432486}
+    lockDoorSign: {fileID: 147334885786599209}
     doorSignSpriteRender: {fileID: 1155552357}
     stageStartPosition: {x: -7.95, y: -2.5, z: 0}
     stageNumber: 1
@@ -4424,6 +4432,7 @@ MonoBehaviour:
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 894876001032754966, guid: 601834e582009f049a5fcd2117e8b5cd, type: 3}
     stageSign: {fileID: 176911485}
+    lockDoorSign: {fileID: 1757445754}
     doorSignSpriteRender: {fileID: 412679872}
     stageStartPosition: {x: -7.95, y: -1.488, z: 0}
     stageNumber: 2
@@ -4431,6 +4440,7 @@ MonoBehaviour:
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 7126575507454112891, guid: 6b452c4b23bd2a848bbb3d0d883c7194, type: 3}
     stageSign: {fileID: 119332563}
+    lockDoorSign: {fileID: 287578174}
     doorSignSpriteRender: {fileID: 287578173}
     stageStartPosition: {x: -7.95, y: -1.488, z: 0}
     stageNumber: 3
@@ -4451,7 +4461,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &860587959
 MonoBehaviour:
@@ -4466,6 +4476,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stages: []
+--- !u!114 &860587960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860587956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8f6151ebd8ed24aa3b1bdf642e40b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearDoorSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  openDoorSign: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  mainCanvasGroup: {fileID: 478914669}
+  pauseCanvasGroup: {fileID: 294561468}
+  gameOverCanvasGroup: {fileID: 806866785}
+  gameClearCanvasGroup: {fileID: 2096345870}
+  coutinueButton: {fileID: 1602399168}
+  reStartButtons:
+  - {fileID: 46128054}
+  - {fileID: 1537613386}
+  - {fileID: 2012166484}
+  stageSelectionButtons:
+  - {fileID: 828684721}
+  - {fileID: 590412479}
+  - {fileID: 731427951}
+  exitButtons:
+  - {fileID: 1548527087}
+  - {fileID: 1872800601}
+  - {fileID: 128068386}
+  timeText: {fileID: 51731226}
+  gameClearTimeText: {fileID: 80495507}
+  rightButton: {fileID: 1100568307}
+  leftButton: {fileID: 2023816232}
+  jumpButton: {fileID: 528295132}
+  pauseButton: {fileID: 590928379}
+  stageStartButton: {fileID: 725476473}
+  timeIcon: {fileID: 131055739}
 --- !u!1 &893470787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4522,7 +4571,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: a52c61e4d863eb24eb1a6cec742bd3ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5053,7 +5102,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: a52c61e4d863eb24eb1a6cec742bd3ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5305,76 +5354,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548527085}
   m_CullTransparentMesh: 1
---- !u!1 &1573483423
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1573483425}
-  - component: {fileID: 1573483424}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1573483424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573483423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d8f6151ebd8ed24aa3b1bdf642e40b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clearDoorSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
-  openDoorSign: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
-  mainCanvasGroup: {fileID: 478914669}
-  pauseCanvasGroup: {fileID: 294561468}
-  gameOverCanvasGroup: {fileID: 806866785}
-  gameClearCanvasGroup: {fileID: 2096345870}
-  coutinueButton: {fileID: 1602399168}
-  reStartButtons:
-  - {fileID: 46128054}
-  - {fileID: 1537613386}
-  - {fileID: 2012166484}
-  stageSelectionButtons:
-  - {fileID: 828684721}
-  - {fileID: 590412479}
-  - {fileID: 731427951}
-  exitButtons:
-  - {fileID: 1548527087}
-  - {fileID: 1872800601}
-  - {fileID: 128068386}
-  timeText: {fileID: 51731226}
-  gameClearTimeText: {fileID: 80495507}
-  rightButton: {fileID: 1100568307}
-  leftButton: {fileID: 2023816232}
-  jumpButton: {fileID: 528295132}
-  pauseButton: {fileID: 590928379}
-  stageStartButton: {fileID: 725476473}
-  timeIcon: {fileID: 131055739}
---- !u!4 &1573483425
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573483423}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1602399166
 GameObject:
   m_ObjectHideFlags: 0
@@ -5541,7 +5520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147334884557770810, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 147334884557770810, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5592,6 +5571,11 @@ PrefabInstance:
 --- !u!4 &1757445753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 147334884557770810, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+  m_PrefabInstance: {fileID: 1757445752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1757445754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5356625994206220131, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
   m_PrefabInstance: {fileID: 1757445752}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1758158522
@@ -5963,7 +5947,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: a52c61e4d863eb24eb1a6cec742bd3ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6189,7 +6173,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: a52c61e4d863eb24eb1a6cec742bd3ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6710,6 +6694,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1707185263}
     m_Modifications:
+    - target: {fileID: 20126174927037914, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 147334884557770809, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
       propertyPath: m_Name
       value: Stage1Door
@@ -6762,8 +6750,17 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+    - target: {fileID: 5356625994206220131, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+--- !u!1 &147334885786599209 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5356625994206220131, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+  m_PrefabInstance: {fileID: 147334885786599208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &660287957259252822
 PrefabInstance:
   m_ObjectHideFlags: 0
