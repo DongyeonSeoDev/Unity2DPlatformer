@@ -86,19 +86,13 @@ public class StageDoor : MonoBehaviour
 
         stages[stageNumber].isStageClear = true;
         stages[stageNumber].doorSignSpriteRender.sprite = uIManager.clearDoorSign;
+        stages[stageNumber].lockDoorSign.SetActive(false);
+        stages[stageNumber].isAnimationPlay = false;
 
         if (stageNumber + 1 < stages.Length)
         {
-            DoorOpen(stages[stageNumber + 1]);
+            stages[stageNumber + 1].isAnimationPlay = true;
+            stages[stageNumber + 1].doorSignSpriteRender.sprite = uIManager.openDoorSign;
         }
-    }
-
-    private void DoorOpen(Stage stage)
-    {
-        stage.doorSignSpriteRender.sprite = uIManager.openDoorSign;
-        stage.lockDoorSign.transform.DOScale(targetLockDoorSignScale, 1f).OnComplete(() =>
-        {
-            stage.lockDoorSign.SetActive(false);
-        }); 
     }
 }

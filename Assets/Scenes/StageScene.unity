@@ -4421,6 +4421,7 @@ MonoBehaviour:
     stageStartPosition: {x: -7.95, y: -1.478, z: 0}
     stageNumber: 0
     isStageClear: 1
+    isAnimationPlay: 1
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 6875695687878096092, guid: aa88b74486a29cc469c4b47cacacc698, type: 3}
     stageSign: {fileID: 1221432486}
@@ -4429,6 +4430,7 @@ MonoBehaviour:
     stageStartPosition: {x: -7.95, y: -2.5, z: 0}
     stageNumber: 1
     isStageClear: 0
+    isAnimationPlay: 1
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 894876001032754966, guid: 601834e582009f049a5fcd2117e8b5cd, type: 3}
     stageSign: {fileID: 176911485}
@@ -4437,6 +4439,7 @@ MonoBehaviour:
     stageStartPosition: {x: -7.95, y: -1.488, z: 0}
     stageNumber: 2
     isStageClear: 0
+    isAnimationPlay: 0
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 7126575507454112891, guid: 6b452c4b23bd2a848bbb3d0d883c7194, type: 3}
     stageSign: {fileID: 119332563}
@@ -4445,6 +4448,7 @@ MonoBehaviour:
     stageStartPosition: {x: -7.95, y: -1.488, z: 0}
     stageNumber: 3
     isStageClear: 0
+    isAnimationPlay: 0
   currentStageDoor: {fileID: 0}
   currentStage: 0
   isEnemyStop: 0
@@ -4488,8 +4492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8f6151ebd8ed24aa3b1bdf642e40b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearDoorSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
-  openDoorSign: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  clearDoorSign: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
+  openDoorSign: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
   mainCanvasGroup: {fileID: 478914669}
   pauseCanvasGroup: {fileID: 294561468}
   gameOverCanvasGroup: {fileID: 806866785}
@@ -6742,6 +6746,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 147334884786269005, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -56389684126255199, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
 --- !u!1 &147334885786599209 stripped

@@ -11,4 +11,5 @@ public class Stage
     public Vector3 stageStartPosition;
     public int stageNumber;
     public bool isStageClear;
+    public bool isAnimationPlay;
 }

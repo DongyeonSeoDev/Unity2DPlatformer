@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class StageSelectionManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class StageSelectionManager : MonoBehaviour
     private PlayerMove playerMove = null;
     private PlayerInput playerInput = null;
     private GameManager gameManager = null;
+
+    private Vector3 targetLockDoorSignScale = new Vector3(0f, 1f, 1f);
 
     private int currentStage = 0;
 
@@ -48,19 +51,36 @@ public class StageSelectionManager : MonoBehaviour
 
             currentStage = gameManager.currentStage;
 
-            if (stages[currentStage].stageObject == null)
+            if (stages[currentStage].isAnimationPlay)
             {
-                stages[currentStage].stageObject = Instantiate(stages[currentStage].stagePrefab, Vector3.zero, Quaternion.identity);
+                stages[currentStage].isAnimationPlay = false;
+                stages[currentStage].lockDoorSign.transform.DOScale(targetLockDoorSignScale, 1f).OnComplete(() =>
+                {
+                    stages[currentStage].lockDoorSign.SetActive(false);
+                    StartStage();
+                });
             }
             else
             {
-                stages[currentStage].stageObject.SetActive(true);
+                StartStage();
             }
-
-            gameManager.ReStart();
-            gameManager.StageStart();
-
-            stages[0].stageObject.SetActive(false);
         }
+    }
+
+    private void StartStage()
+    {
+        if (stages[currentStage].stageObject == null)
+        {
+            stages[currentStage].stageObject = Instantiate(stages[currentStage].stagePrefab, Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            stages[currentStage].stageObject.SetActive(true);
+        }
+
+        gameManager.ReStart();
+        gameManager.StageStart();
+
+        stages[0].stageObject.SetActive(false);
     }
 }
