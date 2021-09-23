@@ -6694,10 +6694,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1707185263}
     m_Modifications:
-    - target: {fileID: 20126174927037914, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 147334884557770809, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
       propertyPath: m_Name
       value: Stage1Door
@@ -6744,14 +6740,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 147334884557770810, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 147334884786269005, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 7980543043835355830, guid: 0a1addae9aac34447b1e890a7ae76292, type: 3}
-    - target: {fileID: 5356625994206220131, guid: f53adec0f4646de43afcac3030d53c4a, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

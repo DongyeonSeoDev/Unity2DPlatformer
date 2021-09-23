@@ -16,6 +16,7 @@ public class StageDoor : MonoBehaviour
     private Tween currentTween = null;
 
     private Vector3 currentStageTextSize = new Vector3(0.5f, 0.5f, 0.5f);
+    private Vector3 targetLockDoorSignScale = new Vector3(0f, 1f, 1f);
 
     private void Start()
     {
@@ -88,8 +89,16 @@ public class StageDoor : MonoBehaviour
 
         if (stageNumber + 1 < stages.Length)
         {
-            stages[stageNumber + 1].doorSignSpriteRender.sprite = uIManager.openDoorSign;
-            stages[stageNumber + 1].lockDoorSign.SetActive(false);
+            DoorOpen(stages[stageNumber + 1]);
         }
+    }
+
+    private void DoorOpen(Stage stage)
+    {
+        stage.doorSignSpriteRender.sprite = uIManager.openDoorSign;
+        stage.lockDoorSign.transform.DOScale(targetLockDoorSignScale, 1f).OnComplete(() =>
+        {
+            stage.lockDoorSign.SetActive(false);
+        }); 
     }
 }
