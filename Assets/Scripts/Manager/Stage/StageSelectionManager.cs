@@ -54,8 +54,12 @@ public class StageSelectionManager : MonoBehaviour
             if (stages[currentStage].isAnimationPlay)
             {
                 stages[currentStage].isAnimationPlay = false;
+                gameManager.isStageSelection = false;
+                GameManager.isPause = true;
+
                 stages[currentStage].lockDoorSign.transform.DOScale(targetLockDoorSignScale, 1f).OnComplete(() =>
                 {
+                    GameManager.isPause = false;
                     stages[currentStage].lockDoorSign.SetActive(false);
                     StartStage();
                 });

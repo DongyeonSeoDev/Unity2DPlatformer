@@ -58,7 +58,6 @@ public class StageDoor : MonoBehaviour
         currentTween.Kill();
         currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0.3f);
         gameManager.currentStage = 0;
-
         uIManager.stageStartButtonTween.Complete();
         uIManager.stageStartButtonTween = uIManager.stageStartButton.transform.DOScale(Vector3.zero, 0.3f);
     }

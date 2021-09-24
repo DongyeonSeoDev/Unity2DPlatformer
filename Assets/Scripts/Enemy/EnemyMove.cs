@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -61,7 +60,14 @@ public class EnemyMove : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.stageReset -= EnemyReset;
+        try
+        {
+            GameManager.Instance.stageReset -= EnemyReset;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     private void EnemyReset()

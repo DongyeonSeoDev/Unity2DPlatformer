@@ -1,4 +1,3 @@
-using System.Text;
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -19,7 +18,7 @@ public class GameManager : MonoBehaviour
         {
             if (instance == null)
             {
-                Debug.LogError("GameManager instance가 없습니다.");
+                Debug.Log("GameManager instance가 없습니다.");
                 return null;
             }
 
@@ -30,9 +29,9 @@ public class GameManager : MonoBehaviour
     public Stage[] stages = null;
 
     private UIManager uIManager = null;
-    private StringBuilder sb = new StringBuilder(8);
 
-    private float time = 0f;
+    private TimeSpan time = TimeSpan.Zero;
+    private float currentTime = 0f;
 
     public static bool isPause = false;
 
@@ -64,7 +63,7 @@ public class GameManager : MonoBehaviour
         {
             isPause = false;
             isEnemyStop = false;
-            time = 0f;
+            currentTime = 0f;
         };
     }
 
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        time += Time.deltaTime;
+        currentTime += Time.deltaTime;
     }
 
     private void OnDisable()
@@ -119,7 +118,7 @@ public class GameManager : MonoBehaviour
     public void StageStart()
     {
         isStageSelection = false;
-        time = 0f;
+        currentTime = 0f;
 
         uIManager.StageStart();
     }
@@ -133,29 +132,9 @@ public class GameManager : MonoBehaviour
         uIManager.GameEnd(state);
     }
 
-    private string timeCheck(int time)
-    {
-        if (time < 10)
-        {
-            return "0" + time;
-        }
-
-        return time.ToString();
-    }
-
     public string TimeDisplay()
     {
-        int minute = (int)time / 60;
-        int second = (int)time - minute * 60;
-        int millisecond = (int)((time - (minute * 60 + second)) * 100);
-
-        sb.Remove(0, sb.Length);
-        sb.Append(timeCheck(minute));
-        sb.Append(':');
-        sb.Append(timeCheck(second));
-        sb.Append(':');
-        sb.Append(timeCheck(millisecond));
-
-        return sb.ToString();
+        time = TimeSpan.FromSeconds(currentTime);
+        return $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}:{time.Milliseconds.ToString("000")}";
     }
 }

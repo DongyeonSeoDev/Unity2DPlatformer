@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RotatingThornAnimation : MonoBehaviour
 {
@@ -38,7 +39,14 @@ public class RotatingThornAnimation : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.Instance.stageReset -= RotatingThornReset;
+        try
+        {
+            GameManager.Instance.stageReset -= RotatingThornReset;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     private void RotatingThornReset()
