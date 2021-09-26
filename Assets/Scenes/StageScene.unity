@@ -1122,6 +1122,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &272474932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6296237022578672943, guid: 3c35833b10321d341985ff9ef83c46b5, type: 3}
+  m_PrefabInstance: {fileID: 119332561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &287578171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4434,8 +4445,10 @@ MonoBehaviour:
     stageSign: {fileID: 0}
     lockDoorSign: {fileID: 0}
     doorSignSpriteRender: {fileID: 0}
+    stageText: {fileID: 0}
     stageStartPosition: {x: -7.95, y: -1.478, z: 0}
     stageNumber: 0
+    highScore: 0
     isStageClear: 1
     isAnimationPlay: 1
   - stageObject: {fileID: 0}
@@ -4443,8 +4456,10 @@ MonoBehaviour:
     stageSign: {fileID: 1221432486}
     lockDoorSign: {fileID: 147334885786599209}
     doorSignSpriteRender: {fileID: 1155552357}
+    stageText: {fileID: 1823885150}
     stageStartPosition: {x: -7.95, y: -2.5, z: 0}
     stageNumber: 1
+    highScore: 0
     isStageClear: 0
     isAnimationPlay: 1
   - stageObject: {fileID: 0}
@@ -4452,8 +4467,10 @@ MonoBehaviour:
     stageSign: {fileID: 176911485}
     lockDoorSign: {fileID: 1757445754}
     doorSignSpriteRender: {fileID: 412679872}
+    stageText: {fileID: 1022000554}
     stageStartPosition: {x: -7.95, y: -1.488, z: 0}
     stageNumber: 2
+    highScore: 0
     isStageClear: 0
     isAnimationPlay: 0
   - stageObject: {fileID: 0}
@@ -4461,8 +4478,10 @@ MonoBehaviour:
     stageSign: {fileID: 119332563}
     lockDoorSign: {fileID: 287578174}
     doorSignSpriteRender: {fileID: 287578173}
+    stageText: {fileID: 272474932}
     stageStartPosition: {x: -7.95, y: -1.488, z: 0}
     stageNumber: 3
+    highScore: 0
     isStageClear: 0
     isAnimationPlay: 0
   currentStageDoor: {fileID: 0}
@@ -4728,6 +4747,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992087521}
   m_CullTransparentMesh: 1
+--- !u!114 &1022000554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6296237022578672943, guid: 3c35833b10321d341985ff9ef83c46b5, type: 3}
+  m_PrefabInstance: {fileID: 1322360414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1100568302
 GameObject:
   m_ObjectHideFlags: 0
@@ -5935,6 +5965,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpSprite: {fileID: 7460046300004610927, guid: f98aa3d998533f2479a54460b4d5a2d0, type: 3}
   downSprite: {fileID: 7034338576483803127, guid: f98aa3d998533f2479a54460b4d5a2d0, type: 3}
+--- !u!114 &1823885150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6296237022578672943, guid: 3c35833b10321d341985ff9ef83c46b5, type: 3}
+  m_PrefabInstance: {fileID: 3992280884427960505}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1842609937
 GameObject:
   m_ObjectHideFlags: 0

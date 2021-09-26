@@ -137,4 +137,13 @@ public class GameManager : MonoBehaviour
         time = TimeSpan.FromSeconds(currentTime);
         return $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}:{time.Milliseconds.ToString("000")}";
     }
+
+    public void HighScoreCheck(Stage stage)
+    {
+        if (stage.highScore > currentTime || stage.highScore == 0)
+        {
+            stage.highScore = currentTime;
+            stage.stageText.text = $"스테이지 {stage.stageNumber}\n최고기록: {TimeDisplay()}";
+        }
+    }
 }

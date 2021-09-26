@@ -78,6 +78,8 @@ public class StageDoor : MonoBehaviour
 
     public void Clear()
     {
+        gameManager.HighScoreCheck(stages[stageNumber]);
+
         if (stages[stageNumber].isStageClear)
         {
             return;
