@@ -214,6 +214,39 @@ public class UIManager : MonoBehaviour
         timeText.text = gameManager.TimeDisplay();
     }
 
+    public void UpdateUI(Stage[] stages)
+    {
+        bool isUseOpenSign = false;
+
+        foreach (Stage stage in stages)
+        {
+            if (stage.stageNumber == 0)
+            {
+                continue;
+            }
+
+            if (stage.highScore > 0)
+            {
+                GameManager.Instance.SetStageText(stage);
+            }
+
+            if (stage.isStageClear)
+            {
+                stage.doorSignSpriteRender.sprite = clearDoorSign;
+            }
+            else if (!isUseOpenSign && !stage.isStageClear && stage.stageNumber != 0)
+            {
+                stage.doorSignSpriteRender.sprite = openDoorSign;
+                isUseOpenSign = true;
+            }
+
+            if (!stage.isAnimationPlay)
+            {
+                stage.lockDoorSign.SetActive(false);
+            }
+        }
+    }
+
     public void StageSelection()
     {
         timeIcon.SetActive(false);
@@ -323,5 +356,7 @@ public class UIManager : MonoBehaviour
             gameEndCanvasGroup.interactable = true;
             gameEndCanvasGroup.blocksRaycasts = true;
         });
+
+        LocalSaveManager.Save(gameManager.stages);
     }
 }

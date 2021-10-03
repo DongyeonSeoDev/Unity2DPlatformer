@@ -24,7 +24,7 @@ public class StageDoor : MonoBehaviour
         uIManager = UIManager.Instance;
 
         stages = gameManager.stages;
-        currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0f);
+        currentTween = stages[stageNumber].stageSign.transform.DOScale(Vector3.zero, 0.01f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,7 +92,6 @@ public class StageDoor : MonoBehaviour
 
         if (stageNumber + 1 < stages.Length)
         {
-            stages[stageNumber + 1].isAnimationPlay = true;
             stages[stageNumber + 1].doorSignSpriteRender.sprite = uIManager.openDoorSign;
         }
     }

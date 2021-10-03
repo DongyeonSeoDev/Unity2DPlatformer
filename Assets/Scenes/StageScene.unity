@@ -4420,6 +4420,7 @@ GameObject:
   - component: {fileID: 860587957}
   - component: {fileID: 860587960}
   - component: {fileID: 860587959}
+  - component: {fileID: 860587961}
   m_Layer: 0
   m_Name: ManagerObjects
   m_TagString: Untagged
@@ -4472,7 +4473,7 @@ MonoBehaviour:
     stageNumber: 2
     highScore: 0
     isStageClear: 0
-    isAnimationPlay: 0
+    isAnimationPlay: 1
   - stageObject: {fileID: 0}
     stagePrefab: {fileID: 7126575507454112891, guid: 6b452c4b23bd2a848bbb3d0d883c7194, type: 3}
     stageSign: {fileID: 119332563}
@@ -4483,7 +4484,7 @@ MonoBehaviour:
     stageNumber: 3
     highScore: 0
     isStageClear: 0
-    isAnimationPlay: 0
+    isAnimationPlay: 1
   currentStageDoor: {fileID: 0}
   currentStage: 0
   isEnemyStop: 0
@@ -4554,6 +4555,18 @@ MonoBehaviour:
   pauseButton: {fileID: 590928379}
   stageStartButton: {fileID: 725476473}
   timeIcon: {fileID: 131055739}
+--- !u!114 &860587961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860587956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6bcd1a9d6730714e9ab6d3d1eedcbcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &893470787
 GameObject:
   m_ObjectHideFlags: 0

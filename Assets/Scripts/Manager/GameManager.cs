@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager uIManager = null;
 
-    private TimeSpan time = TimeSpan.Zero;
+    private TimeSpan timeSpan = TimeSpan.Zero;
     private float currentTime = 0f;
 
     public static bool isPause = false;
@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
             isEnemyStop = false;
             currentTime = 0f;
         };
+
+        LocalSaveManager.Load(stages);
+        uIManager.UpdateUI(stages);
     }
 
     private void Update()
@@ -103,6 +106,8 @@ public class GameManager : MonoBehaviour
 
     public void Exit()
     {
+        LocalSaveManager.Save(stages);
+
         if (stages[currentStage].stageObject != null && stages[currentStage].stageObject.activeSelf)
         {
             stages[currentStage].stageObject.SetActive(false);
@@ -121,6 +126,7 @@ public class GameManager : MonoBehaviour
         currentTime = 0f;
 
         uIManager.StageStart();
+        LocalSaveManager.Save(stages);
     }
     public void GameEnd(eGameStates state)
     {
@@ -132,10 +138,18 @@ public class GameManager : MonoBehaviour
         uIManager.GameEnd(state);
     }
 
-    public string TimeDisplay()
+    public string TimeDisplay(float time = -0.01f)
     {
-        time = TimeSpan.FromSeconds(currentTime);
-        return $"{time.Minutes.ToString("00")}:{time.Seconds.ToString("00")}:{time.Milliseconds.ToString("000")}";
+        if (time == -0.01f)
+        {
+            timeSpan = TimeSpan.FromSeconds(currentTime);
+        }
+        else
+        {
+            timeSpan = TimeSpan.FromSeconds(time);
+        }
+
+        return $"{timeSpan.Minutes.ToString("00")}:{timeSpan.Seconds.ToString("00")}:{timeSpan.Milliseconds.ToString("000")}";
     }
 
     public void HighScoreCheck(Stage stage)
@@ -143,7 +157,12 @@ public class GameManager : MonoBehaviour
         if (stage.highScore > currentTime || stage.highScore == 0)
         {
             stage.highScore = currentTime;
-            stage.stageText.text = $"스테이지 {stage.stageNumber}\n최고기록: {TimeDisplay()}";
+            SetStageText(stage);
         }
+    }
+
+    public void SetStageText(Stage stage)
+    {
+        stage.stageText.text = $"스테이지 {stage.stageNumber}\n최고기록: {TimeDisplay(stage.highScore)}";
     }
 }
